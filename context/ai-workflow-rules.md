@@ -2,7 +2,7 @@
 
 ## Overall Approach
 - **Spec-Driven**: Do not implement without a specific unit spec or clear goal.
-- **Incremental**: Build one verifiable unit at a time. Do not make speculative changes.
+- **Incremental**: Build one verifiable unit at a time. Do not make speculative changes
 
 ## Scoping Rules
 - Work on one folder/boundary at a time (e.g., don't touch CSS and Logic in the same prompt).
