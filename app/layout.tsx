@@ -74,7 +74,6 @@ export default function RootLayout({
         className="bg-background text-foreground"
         suppressHydrationWarning
       >
-        <div className="noise-bg" aria-hidden="true" />
         <SmoothScroll>
           {children}
         </SmoothScroll>
