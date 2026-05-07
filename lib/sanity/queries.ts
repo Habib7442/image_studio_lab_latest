@@ -38,7 +38,8 @@ export const allPacksQuery = groq`
     segment,
     coverImage,
     description,
-    gumroadUrl
+    gumroadUrl,
+    upvotes
   }
 `;
 
@@ -52,6 +53,7 @@ export const singlePackQuery = groq`
     description,
     gumroadUrl,
     masterPrompt,
+    upvotes,
     prompts[]-> {
       _id,
       title,
@@ -73,5 +75,15 @@ export const relatedPacksQuery = groq`
     slug,
     segment,
     coverImage
+  }
+`;
+
+export const approvedReviewsQuery = groq`
+  *[_type == "review" && approved == true] | order(_createdAt desc) {
+    _id,
+    name,
+    rating,
+    comment,
+    _createdAt
   }
 `;

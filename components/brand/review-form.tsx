@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Star, Send, CheckCircle2 } from "lucide-react";
 import { submitReview } from "@/lib/actions/submit-review";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface ReviewFormProps {
   packId?: string;
@@ -45,12 +46,20 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
         <p className="mt-2 text-muted max-w-xs">
           Your review has been submitted and is currently pending moderation.
         </p>
-        <button 
-          onClick={() => setIsSuccess(false)}
-          className="mt-8 text-sm font-semibold uppercase tracking-widest text-accent hover:text-foreground transition-colors"
-        >
-          Submit Another
-        </button>
+        <div className="mt-8 flex flex-col items-center gap-4">
+          <button 
+            onClick={() => setIsSuccess(false)}
+            className="text-sm font-semibold uppercase tracking-widest text-accent hover:text-foreground transition-colors"
+          >
+            Submit Another
+          </button>
+          <Link 
+            href="/"
+            className="text-[10px] font-bold uppercase tracking-widest text-muted hover:text-foreground transition-all"
+          >
+            ← Back to Home
+          </Link>
+        </div>
       </div>
     );
   }
@@ -116,7 +125,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
             />
           </div>
 
-          {/* Email (Hidden or shown, let's keep it simple with just Name) */}
+          {/* Verification */}
           <div className="space-y-2 opacity-50 pointer-events-none">
             <label className="text-[10px] font-bold uppercase tracking-widest text-muted/60 ml-1">
               Verification
