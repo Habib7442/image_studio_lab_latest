@@ -36,7 +36,7 @@ export const Hero = () => {
               alt="Studio Background"
               fill
               priority={i === 0}
-              className="object-cover"
+              className="object-cover object-[75%_center] md:object-center"
             />
           </div>
         ))}
@@ -52,13 +52,15 @@ export const Hero = () => {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Text Content */}
           <div className="flex flex-col items-center">
-            <h1 className="font-serif text-[clamp(40px,8vw,90px)] font-light leading-[1.05] tracking-tight text-foreground">
-              Master prompts. <br />
-              <span className="italic text-accent">Zero engineering.</span>
+            <h1 className="font-serif text-[clamp(32px,7vw,72px)] font-light leading-[1.1] tracking-tight text-foreground">
+              You see beautiful AI images. <br className="hidden md:block" />
+              You can't write the prompts. <br className="hidden md:block" />
+              <span className="italic text-accent">We already wrote them.</span> <br />
+              Copy. Paste. Generate.
             </h1>
             
-            <p className="mt-8 max-w-xl text-lg text-muted md:text-xl font-serif italic">
-              Stop guessing. Start generating. We've already tested the code—you just copy, paste, and create.
+            <p className="mt-8 max-w-2xl text-lg text-muted md:text-xl font-serif italic">
+              Master-tested prompt packs optimized specifically for <span className="text-foreground not-italic font-sans font-bold tracking-tighter">ChatGPT</span> and <span className="text-foreground not-italic font-sans font-bold tracking-tighter">Gemini</span>.
             </p>
 
             <div className="mt-12 flex justify-center">
