@@ -42,14 +42,9 @@ export const SegmentGrid = () => {
               </p>
 
               <div className="mt-10 border-t border-border pt-6">
-                <ul className="space-y-3">
-                  {segment.packs.map((pack) => (
-                    <li key={pack.name} className="flex items-center justify-between text-xs font-medium">
-                      <span className="text-foreground">{pack.name}</span>
-                      <span className="font-mono text-accent">{pack.price}</span>
-                    </li>
-                  ))}
-                </ul>
+                <span className="text-[10px] font-bold uppercase tracking-widest text-accent/60">
+                  Explore Collection →
+                </span>
               </div>
             </Link>
           ))}
