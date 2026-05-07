@@ -16,6 +16,7 @@ import {
 
 const navLinks = [
   { name: "Packs", href: "/packs" },
+  { name: "Reviews", href: "/write-review" },
   { name: "About", href: "/about" },
 ];
 
