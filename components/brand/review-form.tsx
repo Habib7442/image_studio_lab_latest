@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { Star, Send, CheckCircle2 } from "lucide-react";
+import React, { useState, useRef } from "react";
+import { Star, Send, CheckCircle2, User, Upload, X } from "lucide-react";
 import { submitReview } from "@/lib/actions/submit-review";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ReviewFormProps {
   packId?: string;
@@ -17,6 +18,26 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  
+  // Avatar State
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatarPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const removeAvatar = () => {
+    setAvatarPreview(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +53,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
     if (result.success) {
       setIsSuccess(true);
       setRating(0);
+      setAvatarPreview(null);
     } else {
       setError(result.error || "An error occurred");
     }
@@ -81,6 +103,46 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
+        {/* Avatar Upload (Optional) */}
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative group">
+            <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-dashed border-border bg-card/50 flex items-center justify-center transition-all group-hover:border-accent/50">
+              {avatarPreview ? (
+                <Image 
+                  src={avatarPreview} 
+                  alt="Avatar Preview" 
+                  fill 
+                  className="object-cover"
+                />
+              ) : (
+                <User className="h-10 w-10 text-muted/30" />
+              )}
+            </div>
+            
+            <button
+              type="button"
+              onClick={() => avatarPreview ? removeAvatar() : fileInputRef.current?.click()}
+              className={cn(
+                "absolute -bottom-2 -right-2 p-2 rounded-full border border-border bg-background shadow-lg transition-all hover:scale-110",
+                avatarPreview ? "text-red-400 hover:bg-red-500/10" : "text-accent hover:bg-accent/10"
+              )}
+            >
+              {avatarPreview ? <X className="h-4 w-4" /> : <Upload className="h-4 w-4" />}
+            </button>
+          </div>
+          <input 
+            type="file" 
+            ref={fileInputRef}
+            name="avatar"
+            accept="image/*"
+            onChange={handleAvatarChange}
+            className="hidden"
+          />
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted/60">
+            {avatarPreview ? "Photo Added" : "Add Profile Photo (Optional)"}
+          </span>
+        </div>
+
         {/* Star Rating */}
         <div className="flex flex-col items-center gap-4">
           <label className="text-xs font-bold uppercase tracking-widest text-muted/60">

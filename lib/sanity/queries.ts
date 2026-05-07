@@ -84,6 +84,7 @@ export const approvedReviewsQuery = groq`
     name,
     rating,
     comment,
+    avatar,
     _createdAt
   }
 `;

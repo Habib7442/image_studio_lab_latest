@@ -8,17 +8,34 @@ export async function submitReview(formData: FormData) {
   const rating = Number(formData.get("rating"));
   const comment = formData.get("comment") as string;
   const packId = formData.get("packId") as string;
+  const avatarFile = formData.get("avatar") as File;
 
   if (!name || !rating || !comment) {
     return { success: false, error: "Please fill in all required fields." };
   }
 
   try {
+    let avatarAsset;
+    
+    // Upload avatar if provided
+    if (avatarFile && avatarFile.size > 0) {
+      avatarAsset = await writeClient.assets.upload("image", avatarFile, {
+        filename: avatarFile.name,
+      });
+    }
+
     await writeClient.create({
       _type: "review",
       name,
       rating,
       comment,
+      avatar: avatarAsset ? {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: avatarAsset._id,
+        },
+      } : undefined,
       pack: packId ? {
         _type: "reference",
         _ref: packId,
@@ -26,7 +43,8 @@ export async function submitReview(formData: FormData) {
       approved: false, // Default to false for moderation
     });
 
-    revalidatePath("/packs");
+    revalidatePath("/write-review");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Sanity Review Submission Error:", error);

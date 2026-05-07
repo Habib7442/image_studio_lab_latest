@@ -20,6 +20,14 @@ export default {
       validation: (Rule: any) => Rule.required().min(1).max(5),
     },
     {
+      name: 'avatar',
+      title: 'Customer Avatar',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    },
+    {
       name: 'comment',
       title: 'Review Comment',
       type: 'text',

@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { client } from "@/lib/sanity/client";
+import { client, urlFor } from "@/lib/sanity/client";
 import { approvedReviewsQuery } from "@/lib/sanity/queries";
-import { Star } from "lucide-react";
+import { Star, User } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export function Testimonials() {
@@ -71,24 +72,45 @@ export function Testimonials() {
               className="group relative flex flex-col justify-between rounded-xl border border-border bg-card/30 p-8 transition-all hover:border-accent/20 hover:bg-card/50"
             >
               <div>
-                <div className="mb-6 flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      className={cn(
-                        "h-4 w-4",
-                        i < review.rating ? "fill-accent stroke-accent" : "stroke-muted fill-transparent"
-                      )} 
-                    />
-                  ))}
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        className={cn(
+                          "h-3 w-3",
+                          i < review.rating ? "fill-accent stroke-accent" : "stroke-muted/30 fill-transparent"
+                        )} 
+                      />
+                    ))}
+                  </div>
+                  <div className="text-[10px] font-bold uppercase tracking-tighter text-muted/40">
+                    Verified
+                  </div>
                 </div>
                 <p className="font-serif italic text-lg leading-relaxed text-foreground/90">
                   "{review.comment}"
                 </p>
               </div>
-              <div className="mt-8 pt-6 border-t border-border/50">
-                <span className="text-sm font-semibold text-foreground">{review.name}</span>
-                <span className="ml-2 text-[10px] uppercase tracking-widest text-muted">Verified User</span>
+              
+              <div className="mt-8 pt-6 border-t border-border/50 flex items-center gap-4">
+                <div className="h-10 w-10 overflow-hidden rounded-full border border-border bg-background flex items-center justify-center">
+                  {review.avatar ? (
+                    <Image 
+                      src={urlFor(review.avatar).width(100).height(100).url()} 
+                      alt={review.name}
+                      width={40}
+                      height={40}
+                      className="object-cover"
+                    />
+                  ) : (
+                    <User className="h-5 w-5 text-muted/20" />
+                  )}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold text-foreground">{review.name}</span>
+                  <span className="text-[9px] uppercase tracking-[0.2em] text-accent/60 font-bold">Creator</span>
+                </div>
               </div>
             </div>
           ))}
