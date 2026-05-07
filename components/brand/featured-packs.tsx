@@ -49,7 +49,7 @@ export const FeaturedPacks = () => {
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {packs.map((pack, index) => (
-              <PackCard key={pack._id} pack={pack} priority={index === 0} />
+              <PackCard key={pack._id} pack={pack} priority={index < 3} />
             ))}
           </div>
         )}
