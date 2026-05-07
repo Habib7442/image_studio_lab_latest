@@ -26,13 +26,6 @@ export default {
       validation: (Rule: any) => Rule.required().min(10),
     },
     {
-      name: 'pack',
-      title: 'Related Pack',
-      type: 'reference',
-      to: [{ type: 'pack' }],
-      description: 'The pack this review is for (optional)',
-    },
-    {
       name: 'approved',
       title: 'Approved',
       type: 'boolean',
@@ -44,12 +37,11 @@ export default {
     select: {
       title: 'name',
       rating: 'rating',
-      pack: 'pack.title',
     },
-    prepare({ title, rating, pack }: any) {
+    prepare({ title, rating }: any) {
       return {
         title: `${title} (${rating} stars)`,
-        subtitle: pack ? `For: ${pack}` : 'General Review',
+        subtitle: 'Platform Review',
       }
     },
   },

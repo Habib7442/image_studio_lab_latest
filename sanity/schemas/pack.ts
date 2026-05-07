@@ -64,5 +64,11 @@ export const pack = defineType({
       type: "array",
       of: [{ type: "reference", to: [{ type: "prompt" }] }],
     }),
+    defineField({
+      name: "upvotes",
+      title: "Upvotes",
+      type: "number",
+      initialValue: 0,
+    }),
   ],
 });
