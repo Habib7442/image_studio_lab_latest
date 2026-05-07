@@ -1,26 +1,104 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-gold: var(--gold);
+  --color-gold-foreground: var(--gold-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Brand Palette */
+  --background: #FAF7F2; /* Warm Cream */
+  --foreground: #15110D; /* Near-Black */
+  
+  --accent: #7B2D26; /* Deep Maroon */
+  --accent-foreground: #FAF7F2;
+  
+  --gold: #B8893E;
+  --gold-foreground: #15110D;
+  
+  --muted: #6B5F52;
+  --muted-foreground: rgba(21, 17, 13, 0.6);
+  
+  --border: rgba(21, 17, 13, 0.08);
+  --input: rgba(21, 17, 13, 0.12);
+  --ring: #7B2D26;
+  
+  --radius: 0.25rem; /* Editorial style uses smaller radius */
+
+  /* Shadcn overrides */
+  --card: #FFFFFF;
+  --card-foreground: #15110D;
+  --popover: #FFFFFF;
+  --popover-foreground: #15110D;
+  --primary: #15110D;
+  --primary-foreground: #FAF7F2;
+  --secondary: #F2EDE5;
+  --secondary-foreground: #15110D;
+  --destructive: #7B2D26;
+  --destructive-foreground: #FAF7F2;
+}
+
+.dark {
+  /* Dark mode is secondary, but let's provide a sleek version */
+  --background: #0A0A0A;
+  --foreground: #FAF7F2;
+  
+  --accent: #7B2D26;
+  --accent-foreground: #FAF7F2;
+  
+  --gold: #B8893E;
+  --gold-foreground: #0A0A0A;
+  
+  --muted: #A09589;
+  --muted-foreground: rgba(250, 247, 242, 0.6);
+  
+  --border: rgba(250, 247, 242, 0.1);
+  --input: rgba(250, 247, 242, 0.15);
+  --ring: #B8893E;
+
+  --card: #15110D;
+  --card-foreground: #FAF7F2;
+  --popover: #15110D;
+  --popover-foreground: #FAF7F2;
+  --primary: #FAF7F2;
+  --primary-foreground: #15110D;
+  --secondary: #2B221A;
+  --secondary-foreground: #FAF7F2;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
 }

@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>imagestudiolab — Master prompts. Beautiful AI images. Zero prompt engineering.</title>
+<meta name="description" content="Master-tested copy-paste AI prompt packs for ChatGPT and Gemini Nano Banana Pro. Editorial portraits, product photography, cricket fan posters, and more. No prompt engineering required.">
+<meta property="og:title" content="imagestudiolab — Master prompts for beautiful AI images">
+<meta property="og:description" content="See it. Paste it. Generate it. Master-tested prompt packs that work in ChatGPT and Gemini.">
+<meta property="og:type" content="website">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --bg-deep: #F2EDE5;
+    --ink: #15110D;
+    --ink-soft: #2B221A;
+    --accent: #7B2D26;
+    --accent-deep: #5A1F1A;
+    --gold: #B8893E;
+    --gold-light: #D4A862;
+    --muted: #6B5F52;
+    --rule: rgba(21, 17, 13, 0.08);
+    --rule-strong: rgba(21, 17, 13, 0.18);
+    --card: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  /* ─────────── Typography ─────────── */
+  .display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+  }
+  .display em { font-style: italic; font-weight: 400; }
+  .serif { font-family: 'Fraunces', serif; }
+  .italic { font-style: italic; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  .label-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .small-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─────────── Layout ─────────── */
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .container-narrow {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section { position: relative; }
+
+  /* ─────────── Buttons ─────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    border-radius: 999px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-accent {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-accent:hover { background: var(--accent-deep); }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .btn-gold:hover { transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--rule-strong);
+  }
+  .btn-ghost:hover { background: var(--ink); color: var(--bg); }
+  .btn-sm { padding: 10px 18px; font-size: 13px; }
+  .btn-lg { padding: 18px 36px; font-size: 15px; }
+
+  /* ─────────── Navigation ─────────── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--rule);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .logo em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .nav-menu {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+  .nav-menu a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+  .nav-menu a:hover { color: var(--accent); }
+
+  @media (max-width: 800px) {
+    .nav-menu .nav-link { display: none; }
+  }
+
+  /* ─────────── HERO ─────────── */
+  .hero {
+    padding: 80px 0 100px;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-tag {
+    margin-bottom: 32px;
+  }
+  .hero-title {
+    font-size: clamp(60px, 9vw, 124px);
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+  .hero-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--muted);
+    max-width: 560px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .hero-trust {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .trust-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: 4px;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%),
+      linear-gradient(135deg, #2B1F18 0%, #5A3A28 35%, #C4753A 70%, #E8B86F 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(21, 17, 13, 0.12);
+  }
+  .hero-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-visual::after {
+    content: '01 / Studio sample';
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+  .hero-visual-text {
+    position: relative;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 32px;
+    line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+  }
+  .hero-visual-meta {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    text-align: right;
+    color: rgba(255,255,255,0.85);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { aspect-ratio: 4 / 3; }
+    .hero { padding: 56px 0 72px; }
+  }
+
+  /* ─────────── Promise Bar ─────────── */
+  .promise-bar {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 40px 0;
+  }
+  .promise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  .promise-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .promise-icon {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 24px;
+  }
+  .promise-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .promise-text b {
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  @media (max-width: 800px) {
+    .promise-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+
+  /* ─────────── Section Heading ─────────── */
+  .section-heading {
+    margin-bottom: 56px;
+    max-width: 720px;
+  }
+  .section-heading .label-tag { margin-bottom: 16px; display: inline-block; }
+  .section-heading h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .section-heading h2 em { font-style: italic; }
+  .section-heading p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ─────────── Segments ─────────── */
+  .segments {
+    padding: 100px 0 80px;
+  }
+  .segments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .segment-card {
+    background: var(--bg);
+    padding: 40px 36px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .segment-card:hover { background: var(--bg-deep); }
+  .segment-card .segment-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .segment-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .segment-card .segment-desc {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.55;
+  }
+  .segment-card .segment-packs {
+    list-style: none;
+    padding: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 16px;
+  }
+  .segment-card .segment-packs li {
+    font-size: 12px;
+    padding: 6px 0;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .segment-card .segment-packs li .price {
+    color: var(--accent);
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .segment-card .segment-packs li.coming {
+    color: var(--muted);
+    font-style: italic;
+  }
+  @media (max-width: 800px) {
+    .segments-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─────────── Featured Packs ─────────── */
+  .featured {
+    padding: 80px 0 120px;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+  .pack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .pack-card {
+    background: var(--bg);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--rule);
+  }
+  .pack-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(21, 17, 13, 0.08);
+  }
+  .pack-cover {
+    aspect-ratio: 4 / 5;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    color: white;
+    overflow: hidden;
+  }
+  .pack-cover.cricket {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 100%),
+      linear-gradient(135deg, #1a1410 0%, #4d3a1f 50%, #FFCD00 110%);
+  }
+  .pack-cover.memory {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%),
+      linear-gradient(135deg, #1A1A1A 0%, #3d3530 50%, #8a7a6e 110%);
+  }
+  .pack-cover.product {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%),
+      linear-gradient(135deg, #2c2520 0%, #6e5a4a 50%, #d4ad7a 110%);
+  }
+  .pack-cover-meta {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .pack-cover-title {
+    position: relative;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: white;
+  }
+  .pack-cover-title em { font-style: italic; }
+  .pack-cover-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  .pack-info {
+    padding: 24px 28px 28px;
+  }
+  .pack-info h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .pack-info .pack-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .pack-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .pack-price {
+    font-family: 'Fraunces', serif;
+    font-size: 24px;
+    font-weight: 500;
+  }
+  .pack-price .currency {
+    font-size: 14px;
+    color: var(--muted);
+    margin-right: 2px;
+  }
+  .pack-cta {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 500;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+  @media (max-width: 1000px) { .pack-grid { grid-template-columns: 1fr; gap: 24px; } }
+
+  /* ─────────── How It Works ─────────── */
+  .how {
+    padding: 100px 0;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .step {
+    position: relative;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+  }
+  .step .step-num {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .step h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .step p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  @media (max-width: 1000px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .steps { grid-template-columns: 1fr; } }
+
+  /* ─────────── Studio Vault — THE HERO OFFER ─────────── */
+  .vault {
+    background: var(--ink);
+    color: var(--bg);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .vault::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(184, 137, 62, 0.18), transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgba(123, 45, 38, 0.18), transparent 50%);
+    pointer-events: none;
+  }
+  .vault-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .vault-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .vault h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(44px, 6vw, 76px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .vault h2 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .vault-sub {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.4;
+    color: rgba(250, 247, 242, 0.7);
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-weight: 300;
+  }
+  .vault-includes {
+    list-style: none;
+    margin-bottom: 32px;
+  }
+  .vault-includes li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(250, 247, 242, 0.12);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+  }
+  .vault-includes li:last-child { border-bottom: none; }
+  .vault-includes .check {
+    color: var(--gold);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .vault-includes b {
+    font-weight: 500;
+  }
+
+  .vault-card {
+    background: rgba(250, 247, 242, 0.04);
+    border: 1px solid rgba(250, 247, 242, 0.12);
+    border-radius: 4px;
+    padding: 40px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .vault-card-tag {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .vault-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .vault-price {
+    font-family: 'Fraunces', serif;
+    font-size: 92px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--bg);
+    letter-spacing: -0.04em;
+  }
+  .vault-price .currency {
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--gold);
+    margin-right: 4px;
+  }
+  .vault-price-orig {
+    text-decoration: line-through;
+    font-size: 18px;
+    color: rgba(250, 247, 242, 0.4);
+    font-family: 'Fraunces', serif;
+  }
+  .vault-price-note {
+    font-size: 13px;
+    color: rgba(250, 247, 242, 0.6);
+    margin-bottom: 32px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+  }
+  .vault-card .btn-gold {
+    width: 100%;
+    justify-content: center;
+    padding: 18px;
+    font-size: 16px;
+  }
+  .vault-scarcity {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(184, 137, 62, 0.1);
+    border: 1px solid rgba(184, 137, 62, 0.25);
+    border-radius: 4px;
+  }
+  .scarcity-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .scarcity-bar {
+    height: 4px;
+    background: rgba(250, 247, 242, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .scarcity-fill {
+    height: 100%;
+    width: 12%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .scarcity-text {
+    font-size: 12px;
+    color: rgba(250, 247, 242, 0.75);
+  }
+  .scarcity-text b { color: var(--bg); }
+  .vault-guarantee {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(250, 247, 242, 0.55);
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 1000px) {
+    .vault-inner { grid-template-columns: 1fr; gap: 48px; }
+    .vault-card { padding: 28px; }
+  }
+
+  /* ─────────── Free Prompts / Email Capture ─────────── */
+  .free-prompts {
+    padding: 100px 0;
+    background: var(--bg);
+  }
+  .free-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .free-text h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .free-text h2 em { font-style: italic; }
+  .free-text p {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+  .email-form {
+    display: flex;
+    gap: 8px;
+    max-width: 460px;
+    margin-bottom: 16px;
+  }
+  .email-form input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1px solid var(--rule-strong);
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    background: white;
+    color: var(--ink);
+    transition: border-color 0.2s;
+  }
+  .email-form input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .email-form button {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    padding: 16px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .email-form button:hover { background: var(--accent); }
+  .email-note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .lead-magnet-mock {
+    aspect-ratio: 3/4;
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.45) 100%),
+      linear-gradient(135deg, #1A1A1A 0%, #3a342f 60%, #6b5a4d 100%);
+    border-radius: 6px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    box-shadow: 0 24px 60px rgba(21, 17, 13, 0.18);
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-1.5deg);
+  }
+  .lead-magnet-mock::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.18), transparent 60%);
+  }
+  .lead-magnet-mock-meta {
+    position: relative;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.65;
+  }
+  .lead-magnet-mock-title {
+    position: relative;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 48px;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .lead-magnet-mock-title em { font-style: italic; }
+  .lead-magnet-mock-tag {
+    position: relative;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  .lead-magnet-mock-bottom {
+    position: relative;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+  }
+  @media (max-width: 1000px) {
+    .free-grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  /* ─────────── Why It Works (Social proof slot) ─────────── */
+  .why {
+    padding: 100px 0;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--rule);
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .why-text h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .why-text h2 em { font-style: italic; }
+  .why-points {
+    list-style: none;
+    margin-top: 32px;
+  }
+  .why-points li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .why-points li:last-child { border-bottom: none; }
+  .why-points b {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    color: var(--ink);
+    min-width: 180px;
+    font-size: 16px;
+  }
+  .why-points span { font-size: 14px; color: var(--muted); line-height: 1.55; }
+  .quote-card {
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 40px;
+    border-radius: 4px;
+    position: relative;
+  }
+  .quote-card::before {
+    content: '"';
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--gold);
+    position: absolute;
+    top: 8px;
+    left: 24px;
+    opacity: 0.5;
+  }
+  .quote-text {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-top: 32px;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .quote-byline {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .quote-byline b { color: var(--ink); font-weight: 500; }
+  @media (max-width: 1000px) {
+    .why-grid { grid-template-columns: 1fr; gap: 48px; }
+    .why-points b { min-width: 0; }
+  }
+
+  /* ─────────── FAQ ─────────── */
+  .faq {
+    padding: 100px 0 120px;
+  }
+  .faq-list {
+    margin-top: 56px;
+  }
+  details.faq-item {
+    border-top: 1px solid var(--rule);
+    padding: 24px 0;
+  }
+  details.faq-item:last-child { border-bottom: 1px solid var(--rule); }
+  details.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+  details.faq-item summary::-webkit-details-marker { display: none; }
+  details.faq-item summary:hover { color: var(--accent); }
+  details.faq-item summary::after {
+    content: '+';
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+    line-height: 1;
+  }
+  details.faq-item[open] summary::after {
+    content: '−';
+    transform: rotate(0deg);
+  }
+  details.faq-item .faq-answer {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 720px;
+  }
+  details.faq-item .faq-answer p + p { margin-top: 12px; }
+
+  /* ─────────── Final CTA ─────────── */
+  .final-cta {
+    padding: 120px 0;
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(48px, 7vw, 88px);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+  .final-cta h2 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .final-cta p {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: rgba(250, 247, 242, 0.6);
+    margin-bottom: 40px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 300;
+  }
+
+  /* ─────────── Footer ─────────── */
+  footer {
+    padding: 56px 0 40px;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--rule);
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .footer-brand {
+    max-width: 320px;
+  }
+  .footer-brand .logo { margin-bottom: 16px; display: inline-block; }
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .footer-cols {
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .footer-col h5 {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li {
+    padding: 5px 0;
+    font-size: 13px;
+  }
+  .footer-col li a { color: var(--ink-soft); transition: color 0.2s; }
+  .footer-col li a:hover { color: var(--accent); }
+  .footer-base {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">image<em>studio</em>lab</a>
+    <div class="nav-menu">
+      <a href="#packs" class="nav-link">Packs</a>
+      <a href="#free" class="nav-link">Free Prompts</a>
+      <a href="#vault" class="nav-link">Studio Vault</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#vault" class="btn btn-accent btn-sm">Get the Vault →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="hero-tag label-tag">Vol. 02 · 2026 · Studio sessions live</div>
+        <h1 class="hero-title display">Master prompts.<br>Beautiful AI images.<br><em>Zero prompt engineering.</em></h1>
+        <p class="hero-sub">See an aesthetic. Paste our prompt. Generate it. Curated, master-tested prompt packs for ChatGPT and Gemini Nano Banana Pro — no Midjourney needed.</p>
+        <div class="hero-ctas">
+          <a href="#vault" class="btn btn-gold btn-lg">Get Studio Vault — $99</a>
+          <a href="#free" class="btn btn-ghost btn-lg">Try 25 prompts free</a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item"><span class="trust-dot"></span>ChatGPT + Gemini compatible</div>
+          <div class="trust-item"><span class="trust-dot"></span>Instant PDF delivery</div>
+          <div class="trust-item"><span class="trust-dot"></span>Founder pricing — first 250 only</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-text">"She didn't<br>know she was<br>being<br>photographed."</div>
+        <div class="hero-visual-meta">The Glow Hour<br>Vol. 02 · Cinematic</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROMISE BAR ═══════════════════════ -->
+<section class="promise-bar">
+  <div class="container">
+    <div class="promise-grid">
+      <div class="promise-item">
+        <span class="promise-icon">i</span>
+        <div class="promise-text">
+          <b>Master Director Prompt</b>
+          A persona system prompt you paste once. The AI stays primed for every prompt that follows.
+        </div>
+      </div>
+      <div class="promise-item">
+        <span class="promise-icon">ii</span>
+        <div class="promise-text">
+          <b>25 Tested Prompts × 3 Intensities</b>
+          75 effective variations per pack. Subtle / Medium / Dramatic. All copy-paste ready.
+        </div>
+      </div>
+      <div class="promise-item">
+        <span class="promise-icon">iii</span>
+        <div class="promise-text">
+          <b>Troubleshooting Built In</b>
+          When AI gets it wrong (it sometimes does), exact fixes. Plus iteration phrases that actually work.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEGMENTS ═══════════════════════ -->
+<section class="segments" id="segments">
+  <div class="container">
+    <div class="section-heading">
+      <span class="label-tag">The catalog</span>
+      <h2>Four buyer types.<br>One <em>universal promise.</em></h2>
+      <p>Every pack solves the same problem — *"I see beautiful AI images. I can't write the prompts."* — for a specific kind of buyer.</p>
+    </div>
+
+    <div class="segments-grid">
+      <div class="segment-card">
+        <div class="segment-icon">🛒</div>
+        <h3>For Sellers</h3>
+        <p class="segment-desc">Etsy owners, Shopify D2C, local brands, POD sellers, restaurants. Pro product photos without a photographer.</p>
+        <ul class="segment-packs">
+          <li>Product Photoshoot Pack <span class="price">$29</span></li>
+          <li>Lifestyle Product Pack <span class="price">$19</span></li>
+          <li>Food Photography Pack <span class="price">$19</span></li>
+          <li class="coming">Real Estate · UGC Ad · soon</li>
+        </ul>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon">🎨</div>
+        <h3>For Creators</h3>
+        <p class="segment-desc">Content creators, aspiring models, aesthetic curators. Editorial-grade portraits without a studio.</p>
+        <ul class="segment-packs">
+          <li>Memory Lane (Childhood Self) <span class="price">$14</span></li>
+          <li>Cinematic Lighting <span class="price">$19</span></li>
+          <li>Celebrity Photographer Pack <span class="price">$29</span></li>
+          <li class="coming">Aesthetic Portrait · Fashion · soon</li>
+        </ul>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon">🏏</div>
+        <h3>For Fans</h3>
+        <p class="segment-desc">Cricket fans, Bollywood fans, sports & culture enthusiasts. See yourself as the hero of the story.</p>
+        <ul class="segment-packs">
+          <li>Cricketer Selfie Pack <span class="price">$14</span></li>
+          <li>CSK / RCB / MI Fan Packs <span class="price">$9 each</span></li>
+          <li>Bollywood Portrait Pack <span class="price">$14</span></li>
+          <li class="coming">Cricket Legends · IPL Match Day · soon</li>
+        </ul>
+      </div>
+
+      <div class="segment-card">
+        <div class="segment-icon">💼</div>
+        <h3>For Professionals</h3>
+        <p class="segment-desc">Job seekers, founders, consultants, indie musicians. Headshots and brand portraits that look hired.</p>
+        <ul class="segment-packs">
+          <li>LinkedIn Headshot Pack <span class="price">$19</span></li>
+          <li>Personal Brand Portrait Pack <span class="price">$19</span></li>
+          <li>Album Cover Pack <span class="price">$19</span></li>
+          <li class="coming">More B2B packs · soon</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FEATURED PACKS ═══════════════════════ -->
+<section class="featured" id="packs">
+  <div class="container">
+    <div class="section-heading">
+      <span class="label-tag">Launch trio</span>
+      <h2>Three packs.<br>Live <em>this week.</em></h2>
+      <p>Each pack ships as a styled PDF with 25 master-tested prompts, the Director system prompt, intensity variants, and troubleshooting. Buy one, three, five, or get the Vault.</p>
+    </div>
+
+    <div class="pack-grid">
+      <a href="#" class="pack-card">
+        <div class="pack-cover cricket">
+          <div class="pack-cover-meta">Vol. 03 · For Fans</div>
+          <div>
+            <div class="pack-cover-title">Cricketer<br><em>Selfie.</em></div>
+            <div class="pack-cover-tagline">"You. In the yellow.<br>On the pitch. Forever."</div>
+          </div>
+        </div>
+        <div class="pack-info">
+          <h4>Cricketer Selfie Pack</h4>
+          <p class="pack-desc">25 prompts to turn any selfie into a cricket-hero poster — captain at toss, trophy lift, last-over moment. Match-Day Heroes through Fan Identity.</p>
+          <div class="pack-meta-row">
+            <div class="pack-price"><span class="currency">$</span>14</div>
+            <span class="pack-cta">View pack →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="pack-card">
+        <div class="pack-cover memory">
+          <div class="pack-cover-meta">Vol. 01 · For Creators</div>
+          <div>
+            <div class="pack-cover-title">Memory<br><em>Lane.</em></div>
+            <div class="pack-cover-tagline">"Two strangers<br>who share a face."</div>
+          </div>
+        </div>
+        <div class="pack-info">
+          <h4>Memory Lane — Childhood Self</h4>
+          <p class="pack-desc">25 nostalgic AI portrait prompts. Past vs present, hug younger self, birthday studio, memory polaroid, letter to younger me. Riding the trend.</p>
+          <div class="pack-meta-row">
+            <div class="pack-price"><span class="currency">$</span>14</div>
+            <span class="pack-cta">View pack →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="#" class="pack-card">
+        <div class="pack-cover product">
+          <div class="pack-cover-meta">Vol. 04 · For Sellers</div>
+          <div>
+            <div class="pack-cover-title">Product<br><em>Photoshoot.</em></div>
+            <div class="pack-cover-tagline">"Your product.<br>Vogue-grade."</div>
+          </div>
+        </div>
+        <div class="pack-info">
+          <h4>Product Photoshoot Pack</h4>
+          <p class="pack-desc">25 prompts for Etsy / Shopify / local brand photos. Hero white background, lifestyle in-use, flat lay, brand storytelling, detail macros.</p>
+          <div class="pack-meta-row">
+            <div class="pack-price"><span class="currency">$</span>29</div>
+            <span class="pack-cta">View pack →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+<section class="how">
+  <div class="container">
+    <div class="section-heading">
+      <span class="label-tag">The method</span>
+      <h2>From zero<br>to <em>editorial</em><br>in 60 seconds.</h2>
+      <p>You don't need to learn prompt engineering. You need someone who already learned it and shipped you the recipe. That's us.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">i</div>
+        <h4>Open the AI</h4>
+        <p>Launch ChatGPT (with image generation) or Google Gemini (Nano Banana Pro). Free tier works. No Midjourney.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">ii</div>
+        <h4>Paste the Director</h4>
+        <p>Paste our Master Director system prompt once at the start. The AI primes itself for premium output.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iii</div>
+        <h4>Pick & paste</h4>
+        <p>Pick any of the 25 prompts. Upload your photo if needed. Paste. Hit generate.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">iv</div>
+        <h4>Cherry-pick</h4>
+        <p>Generate 4–6 times. Pick the best one. Want subtler? Run the Subtle variant. Want more drama? Run Dramatic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ STUDIO VAULT — THE HERO OFFER ═══════════════════════ -->
+<section class="vault" id="vault">
+  <div class="container">
+    <div class="vault-inner">
+      <div>
+        <div class="vault-tag">🔥 Founder's Lifetime Access</div>
+        <h2 class="display">The Studio<br><em>Vault.</em></h2>
+        <p class="vault-sub">Every pack we'll ever release. Yours forever. Locked at founder's pricing for the first 250 buyers — then it doubles.</p>
+
+        <ul class="vault-includes">
+          <li><span class="check">✓</span> <span><b>All current packs</b> — Memory Lane, Cinematic Lighting, Cricketer Selfie, Product Photoshoot</span></li>
+          <li><span class="check">✓</span> <span><b>All future packs</b> — auto-delivered to your inbox the day each one ships</span></li>
+          <li><span class="check">✓</span> <span><b>Master Director system prompts</b> for every pack</span></li>
+          <li><span class="check">✓</span> <span><b>Intensity variants</b> — Subtle / Medium / Dramatic for every prompt</span></li>
+          <li><span class="check">✓</span> <span><b>Troubleshooting + iteration phrases</b> — fix any AI failure mode</span></li>
+          <li><span class="check">✓</span> <span><b>Commercial license</b> — use generated images for client work, ads, products</span></li>
+          <li><span class="check">✓</span> <span><b>Founder badge</b> — permanent identity in our community</span></li>
+          <li><span class="check">✓</span> <span><b>30-day money-back guarantee</b> — risk reversal at scale</span></li>
+        </ul>
+      </div>
+
+      <div class="vault-card">
+        <div class="vault-card-tag">Studio Vault · Lifetime</div>
+        <div class="vault-price-row">
+          <div class="vault-price"><span class="currency">$</span>99</div>
+        </div>
+        <div class="vault-price-orig">Future price: $299</div>
+        <div class="vault-price-note">One payment. No subscription. No recurring charges.</div>
+
+        <a href="https://gumroad.com/" target="_blank" rel="noopener noreferrer" class="btn btn-gold">Claim Founder's Access →</a>
+
+        <div class="vault-scarcity">
+          <div class="scarcity-label">Founder spots remaining</div>
+          <div class="scarcity-bar">
+            <div class="scarcity-fill" id="scarcityFill"></div>
+          </div>
+          <div class="scarcity-text"><b>30</b> claimed of 250 · Price rises to <b>$149</b> when cap is hit</div>
+        </div>
+
+        <div class="vault-guarantee">↻ 30-day money-back guarantee</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FREE PROMPTS / EMAIL CAPTURE ═══════════════════════ -->
+<section class="free-prompts" id="free">
+  <div class="container">
+    <div class="free-grid">
+      <div class="free-text">
+        <span class="label-tag" style="display: inline-block; margin-bottom: 16px;">Free starter pack</span>
+        <h2>The Master Director<br>Prompt + 25 free prompts. <em>Yours.</em></h2>
+        <p>Not ready to commit? Get our Master Aesthetic Director system prompt — the same one buyers paste at the start of every session — plus 25 sample prompts across all four segments. Free, instant, no card.</p>
+
+        <form class="email-form" onsubmit="event.preventDefault(); alert('Connect your ConvertKit form here.');">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">Send it →</button>
+        </form>
+        <p class="email-note">No spam, no sales-pitches. One welcome email + a 5-email creator series. Unsubscribe anytime.</p>
+      </div>
+
+      <div class="lead-magnet-mock">
+        <div class="lead-magnet-mock-meta">imagestudiolab · 2026</div>
+        <div>
+          <div class="lead-magnet-mock-title">Master<br><em>Director.</em></div>
+          <div class="lead-magnet-mock-tag">A 12-page primer + 25 prompts. Free.</div>
+        </div>
+        <div class="lead-magnet-mock-bottom">PDF · Instant download</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ WHY IT WORKS ═══════════════════════ -->
+<section class="why">
+  <div class="container">
+    <div class="why-grid">
+      <div class="why-text">
+        <span class="label-tag" style="display: inline-block; margin-bottom: 16px;">Why this works</span>
+        <h2>Most prompts produce<br><em>generic results.</em><br>Ours don't.</h2>
+
+        <ul class="why-points">
+          <li><b>Director-grade specificity</b><span>Every prompt names a specific film stock, lens, lighting setup, and mood. No vague "cinematic" — Kodak Portra 400 on an 85mm f/1.4.</span></li>
+          <li><b>Identity preservation</b><span>Your face, your hair, your outfit — preserved exactly. Light is the only thing the AI changes.</span></li>
+          <li><b>Tested 100+ times</b><span>Each prompt was iterated until it produced premium output 4 out of 6 generations.</span></li>
+          <li><b>Failure modes named</b><span>Generic "no AI artifacts" is lazy. We name plastic skin, melted jewelry, fused fingers, halo bleeding.</span></li>
+          <li><b>Mood as poetry, not adjectives</b><span>"The reverent quiet of the last warm minute of daylight" — not "warm cozy lighting."</span></li>
+        </ul>
+      </div>
+
+      <div class="quote-card">
+        <p class="quote-text">"Most AI prompt packs are 200 prompts you'll never use. imagestudiolab ships 25 you'll use forever — with a system that actually makes them work."</p>
+        <p class="quote-byline"><b>Founder's note</b><br>The kind of pack we wished existed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FAQ ═══════════════════════ -->
+<section class="faq" id="faq">
+  <div class="container-narrow">
+    <div class="section-heading">
+      <span class="label-tag">FAQ</span>
+      <h2>The <em>questions</em> we hear most.</h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Do I need Midjourney?</summary>
+        <div class="faq-answer">
+          <p>No. Every prompt is built for ChatGPT (with GPT Image / DALL·E) and Gemini Nano Banana Pro. Both work. Many buyers also use Adobe Firefly Generative Edit for relighting prompts. We deliberately do <strong>not</strong> require Midjourney — that's the whole point.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Will the AI render the prompt perfectly every time?</summary>
+        <div class="faq-answer">
+          <p>Be honest: no AI tool produces perfect output 100% of the time. Realistic expectation: 4–6 generations per prompt, then cherry-pick the best. That's how every successful AI creator works.</p>
+          <p>Our packs ship with a troubleshooting page that names the 10 most common AI failures and exact phrases to fix them. We've baked that hard-won knowledge in.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What's the difference between the single packs and the Studio Vault?</summary>
+        <div class="faq-answer">
+          <p>Single packs ($14–29) get you one specific pack. The Studio Vault ($99 founder's price) gets you <strong>every pack we currently sell AND every pack we'll ever release in the future</strong>. We add new packs every 2–4 weeks.</p>
+          <p>If you'll buy more than 3 packs over the next year, the Vault is cheaper. Plus it includes commercial license — use generated outputs for client work or product photos.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>How does "lifetime access" actually work on Gumroad?</summary>
+        <div class="faq-answer">
+          <p>The Studio Vault is one Gumroad product. When we ship a new pack, we update the Vault's file bundle. Gumroad automatically emails every past Vault buyer: "New file added — re-download to access." You click, download, get the new pack. Repeat for every future pack we ship.</p>
+          <p>It's the same mechanism Tatiana Tsiguleva and dozens of other Gumroad creators use for lifetime deals. It just works.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I use the generated images commercially?</summary>
+        <div class="faq-answer">
+          <p>Single-pack buyers: personal use only. Studio Vault buyers: <strong>commercial license included</strong>. Use generated outputs for client work, product photos, ads, social media for your business — anywhere except reselling the prompts themselves.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>What happens after I buy?</summary>
+        <div class="faq-answer">
+          <p>Instant. Gumroad sends you the PDF immediately after payment. You also get a confirmation email with download links. The Master Director prompt is on page 3 — paste it into ChatGPT or Gemini and you're ready.</p>
+          <p>If you bought the Vault, you'll automatically receive every new pack we ship by email — no action needed from you.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is there a refund policy?</summary>
+        <div class="faq-answer">
+          <p>Single packs are digital, instant-delivery, and non-refundable — that's why we publish 5 free prompts per pack on this site. Try those before you commit to the paid tier.</p>
+          <p>The Studio Vault has a <strong>30-day money-back guarantee</strong>. If it's not what you expected, email us within 30 days for a full refund.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why is the founder's price $99 if it'll rise to $299?</summary>
+        <div class="faq-answer">
+          <p>The first 250 Vault buyers help us fund the next 10 packs. We're rewarding early belief with a permanent discount. Once the 250 cap is hit, the price rises to $149, then $199 at 500 buyers, capping at $299 by the time we have 25+ packs in the catalog.</p>
+          <p>Founders also get a permanent badge in our community and grandfathered access to features we'll add later (community gallery, prompt voting, etc.).</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I see samples before I buy?</summary>
+        <div class="faq-answer">
+          <p>Yes — every pack has 5 free sample prompts hosted right on imagestudiolab.com. You can copy them, paste them in ChatGPT or Gemini, and see the quality before deciding. Look for "Try free prompts →" on each pack page.</p>
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do you ship more packs after launch?</summary>
+        <div class="faq-answer">
+          <p>Yes — every 2–4 weeks. The catalog is the strategy. Every new pack adds value to the Vault and gives single-pack buyers a reason to come back. Recent additions include Memory Lane (Childhood Self trend), Cinematic Lighting (relighting), and the upcoming Celebrity Photographer pack.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FINAL CTA ═══════════════════════ -->
+<section class="final-cta">
+  <div class="container-narrow">
+    <h2 class="display">Stop scrolling.<br>Start <em>generating.</em></h2>
+    <p>The Vault. Once. Forever. Founder's pricing locked at $99 for the first 250 buyers.</p>
+    <a href="#vault" class="btn btn-gold btn-lg">Claim Founder's Access — $99 →</a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">image<em>studio</em>lab</a>
+        <p>Master prompts. Beautiful AI images. Zero prompt engineering. Curated, copy-paste prompt packs for ChatGPT and Gemini Nano Banana Pro.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Packs</h5>
+          <ul>
+            <li><a href="#packs">Cricketer Selfie</a></li>
+            <li><a href="#packs">Memory Lane</a></li>
+            <li><a href="#packs">Product Photoshoot</a></li>
+            <li><a href="#packs">Cinematic Lighting</a></li>
+            <li><a href="#packs">All packs →</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Studio</h5>
+          <ul>
+            <li><a href="#vault">Studio Vault</a></li>
+            <li><a href="#free">Free prompts</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <ul>
+            <li><a href="https://instagram.com/designnai.official" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">Pinterest</a></li>
+            <li><a href="#" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+            <li><a href="/cdn-cgi/l/email-protection#2149444d4d4e61484c40464452555445484e4d40430f424e4c">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5>
+          <ul>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Refunds</a></li>
+            <li><a href="#">License</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© 2026 imagestudiolab. All packs locked. Anonymous studio.</span>
+      <span>Made for creators · Powered by Gumroad · Hosted on imagestudiolab.com</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Animate scarcity bar on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = document.getElementById('scarcityFill');
+        if (fill) fill.style.transition = 'width 1.2s cubic-bezier(0.65, 0, 0.35, 1)';
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const vault = document.getElementById('vault');
+  if (vault) observer.observe(vault);
+
+  // Smooth nav link active highlight (optional)
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const target = link.getAttribute('href');
+      if (target && target.startsWith('#')) {
+        e.preventDefault();
+        const el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
