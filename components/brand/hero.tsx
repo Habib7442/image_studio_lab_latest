@@ -21,7 +21,7 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-background pt-32 pb-16 md:pt-48 md:pb-32 min-h-[85vh] flex items-center">
+    <section className="relative overflow-hidden bg-background pt-24 pb-16 md:pt-36 md:pb-32 min-h-[85vh] flex items-center">
       {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
         {bgImages.map((src, i) => (
@@ -51,10 +51,10 @@ export const Hero = () => {
       <div className="shader-blob bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-gold/5" style={{ animationDelay: '-5s', animationDuration: '25s' }} />
       
       <div className="mx-auto max-w-7xl px-6 relative z-20 w-full">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto w-full">
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left max-w-4xl lg:max-w-3xl lg:mx-0 mx-auto w-full">
           {/* Text Content */}
-          <div className="flex flex-col items-center">
-            <h1 className="font-serif text-[clamp(32px,7vw,72px)] font-light leading-[1.1] tracking-tight text-foreground">
+          <div className="flex flex-col items-center lg:items-start">
+            <h1 className="font-serif text-[clamp(30px,6.5vw,66px)] font-light leading-[1.1] tracking-tight text-foreground">
               You see beautiful AI images. <br className="hidden md:block" />
               You can't write the prompts. <br className="hidden md:block" />
               <span className="italic text-accent">We already wrote them.</span> <br />
@@ -65,7 +65,7 @@ export const Hero = () => {
               Master-tested prompt packs optimized specifically for <span className="text-foreground not-italic font-sans font-bold tracking-tighter">ChatGPT</span> and <span className="text-foreground not-italic font-sans font-bold tracking-tighter">Gemini</span>.
             </p>
 
-            <div className="mt-12 flex justify-center">
+            <div className="mt-12 flex justify-center lg:justify-start">
               <Link
                 href="/packs"
                 className="group relative flex items-center gap-3 rounded-full bg-foreground px-12 py-5 text-sm font-semibold text-background transition-all hover:bg-accent hover:shadow-[0_0_40px_rgba(229,181,103,0.3)] hover:scale-[1.02] active:scale-95"
@@ -78,7 +78,7 @@ export const Hero = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="mt-16 flex flex-wrap justify-center gap-x-8 gap-y-4 border-t border-border pt-8">
+            <div className="mt-16 flex flex-wrap justify-center lg:justify-start gap-x-8 gap-y-4 border-t border-border pt-8">
               <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.2em] text-muted">
                 <div className="h-1.5 w-1.5 rounded-full bg-accent" />
                 Master Tested
