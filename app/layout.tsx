@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { Navbar } from "@/components/brand/navbar";
-import { Footer } from "@/components/brand/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,6 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={cn(
         "h-full",
         "antialiased",
@@ -37,10 +36,11 @@ export default function RootLayout({
         "font-sans"
       )}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body 
+        className="bg-background text-foreground"
+        suppressHydrationWarning
+      >
+        {children}
       </body>
     </html>
   );

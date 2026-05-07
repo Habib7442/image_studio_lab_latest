@@ -27,24 +27,10 @@ export const pack = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Sellers", value: "sellers" },
           { title: "Creators", value: "creators" },
-          { title: "Fans", value: "fans" },
-          { title: "Professionals", value: "professionals" },
         ],
       },
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "priceUSD",
-      title: "Price (USD)",
-      type: "number",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "priceINR",
-      title: "Price (INR)",
-      type: "number",
     }),
     defineField({
       name: "coverImage",
@@ -64,7 +50,12 @@ export const pack = defineType({
       name: "gumroadUrl",
       title: "Gumroad URL",
       type: "url",
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "masterPrompt",
+      title: "Master Prompt (Optional)",
+      type: "text",
+      description: "Global system-level or Director persona prompt for the entire pack.",
     }),
     defineField({
       name: "prompts",

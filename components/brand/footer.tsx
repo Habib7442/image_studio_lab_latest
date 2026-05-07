@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Footer = () => {
   return (
@@ -8,10 +9,15 @@ export const Footer = () => {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-8">
           {/* Brand Info */}
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="font-serif text-2xl font-medium tracking-tight">
-              imagestudiolab<em className="not-italic text-accent">.</em>
+            <Link href="/" className="relative block h-8 w-32 mb-4">
+              <Image 
+                src="/logo.png" 
+                alt="Image Studio Lab" 
+                fill
+                className="object-contain object-left"
+              />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+            <p className="max-w-xs text-sm leading-relaxed text-muted">
               Master prompts. Beautiful AI images. <br />
               Zero prompt engineering.
             </p>
@@ -24,7 +30,6 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm font-medium text-muted">
               <li><Link href="/packs" className="hover:text-accent">Prompt Packs</Link></li>
-              <li><Link href="/vault" className="hover:text-accent">Studio Vault</Link></li>
               <li><Link href="/try-free" className="hover:text-accent">Free Samples</Link></li>
               <li><Link href="/how-it-works" className="hover:text-accent">How it Works</Link></li>
             </ul>

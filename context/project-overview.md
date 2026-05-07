@@ -6,7 +6,7 @@
 1.  **Simplify AI Creation**: Eliminate the need for prompt engineering by providing "Master Director" systems.
 2.  **Premium Editorial Positioning**: Stand out from generic marketplaces with a high-end, magazine-coded brand.
 3.  **Multi-Segment Reach**: Serve Sellers, Creators, Fans (Cricket/Bollywood), and Professionals under one brand.
-4.  **Ship-Fast MVP**: Launch with 3-4 high-quality packs and a Lifetime Vault offer.
+4.  **Ship-Fast MVP**: Launch with 3-4 high-quality packs.
 
 ## Core User Flow
 1.  **Discover**: User arrives via social media (Instagram Cricket Reels, Pinterest, TikTok) or SEO.
