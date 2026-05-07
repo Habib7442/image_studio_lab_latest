@@ -106,7 +106,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
         {/* Avatar Upload (Optional) */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative group">
-            <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-dashed border-border bg-card/50 flex items-center justify-center transition-all group-hover:border-accent/50">
+            <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-dashed border-border bg-card/50 flex items-center justify-center transition-all group-hover:border-accent/50">
               {avatarPreview ? (
                 <Image 
                   src={avatarPreview} 
