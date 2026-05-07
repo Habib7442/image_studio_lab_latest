@@ -5,9 +5,22 @@ import Image from "next/image";
 
 export const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-background pt-8 pb-12 md:pt-12 md:pb-16">
+    <section className="relative overflow-hidden bg-background pt-32 pb-16 md:pt-48 md:pb-32 min-h-[80vh] flex items-center">
+      {/* Background Image with Dark Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero_bg.png"
+          alt="Studio Background"
+          fill
+          priority
+          className="object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      </div>
+
       {/* Shaders / Blobs */}
-      <div className="shader-blob top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-accent/10" />
+      <div className="shader-blob top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-accent/10 opacity-50" />
       <div className="shader-blob bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-gold/5" style={{ animationDelay: '-5s', animationDuration: '25s' }} />
       
       <div className="mx-auto max-w-7xl px-6 relative z-10">

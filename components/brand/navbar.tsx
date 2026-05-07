@@ -13,10 +13,26 @@ const navLinks = [
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="nav sticky top-0 z-50 w-full border-b border-border bg-background/92 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <nav 
+      className={cn(
+        "nav fixed top-0 left-0 z-50 w-full transition-all duration-300",
+        isScrolled 
+          ? "border-b border-border bg-background/92 backdrop-blur-xl py-4" 
+          : "border-b border-transparent bg-transparent py-6"
+      )}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         {/* Logo: Extreme Left */}
         <Link href="/" className="logo group relative flex items-center h-10 w-40">
           <Image 
