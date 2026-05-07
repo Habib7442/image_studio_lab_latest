@@ -1,0 +1,56 @@
+import { StarIcon } from '@sanity/icons'
+
+export default {
+  name: 'review',
+  title: 'Review',
+  type: 'document',
+  icon: StarIcon,
+  fields: [
+    {
+      name: 'name',
+      title: 'Customer Name',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'rating',
+      title: 'Rating',
+      type: 'number',
+      description: '1 to 5 stars',
+      validation: (Rule: any) => Rule.required().min(1).max(5),
+    },
+    {
+      name: 'comment',
+      title: 'Review Comment',
+      type: 'text',
+      validation: (Rule: any) => Rule.required().min(10),
+    },
+    {
+      name: 'pack',
+      title: 'Related Pack',
+      type: 'reference',
+      to: [{ type: 'pack' }],
+      description: 'The pack this review is for (optional)',
+    },
+    {
+      name: 'approved',
+      title: 'Approved',
+      type: 'boolean',
+      description: 'Only approved reviews will be visible on the website',
+      initialValue: false,
+    },
+  ],
+  preview: {
+    select: {
+      title: 'name',
+      rating: 'rating',
+      pack: 'pack.title',
+    },
+    prepare({ title, rating, pack }: any) {
+      return {
+        title: `${title} (${rating} stars)`,
+        subtitle: pack ? `For: ${pack}` : 'General Review',
+      }
+    },
+  },
+}

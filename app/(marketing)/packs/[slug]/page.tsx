@@ -9,6 +9,8 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+import { ReviewForm } from "@/components/brand/review-form";
+
 export default async function PackPage({ params }: PageProps) {
   const { slug } = await params;
   const pack = await client.fetch(singlePackQuery, { slug });
@@ -42,6 +44,13 @@ export default async function PackPage({ params }: PageProps) {
               </div>
             )}
           </div>
+        </div>
+      </section>
+
+      {/* Review Section */}
+      <section className="bg-background py-24 border-t border-border/50">
+        <div className="mx-auto max-w-7xl px-6">
+          <ReviewForm packId={pack._id} packTitle={pack.title} />
         </div>
       </section>
 

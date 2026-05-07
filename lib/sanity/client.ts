@@ -9,7 +9,16 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Set to true for production
+  useCdn: false,
+});
+
+// For secure server-side write operations (Reviews)
+export const writeClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_WRITE_TOKEN,
 });
 
 const builder = createImageUrlBuilder(client);
