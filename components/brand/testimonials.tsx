@@ -15,7 +15,10 @@ export function Testimonials() {
   useEffect(() => {
     async function fetchReviews() {
       try {
-        const data = await client.fetch(approvedReviewsQuery);
+        // Fetch with no-cache to ensure latest approved reviews are shown
+        const data = await client.fetch(approvedReviewsQuery, {}, {
+          cache: 'no-store'
+        });
         setReviews(data);
       } catch (error) {
         console.error("Error fetching reviews:", error);
