@@ -50,8 +50,8 @@ export const Hero = () => {
       <div className="shader-blob top-[-10%] left-[-10%] h-[500px] w-[500px] rounded-full bg-accent/10 opacity-50" />
       <div className="shader-blob bottom-[-20%] right-[-10%] h-[600px] w-[600px] rounded-full bg-gold/5" style={{ animationDelay: '-5s', animationDuration: '25s' }} />
       
-      <div className="mx-auto max-w-7xl px-6 relative z-10">
-        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+      <div className="mx-auto max-w-7xl px-6 relative z-20 w-full">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto w-full">
           {/* Text Content */}
           <div className="flex flex-col items-center">
             <h1 className="font-serif text-[clamp(32px,7vw,72px)] font-light leading-[1.1] tracking-tight text-foreground">
