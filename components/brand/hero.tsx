@@ -1,22 +1,47 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import Image from "next/image";
 
+const bgImages = [
+  "/hero_bg.png",
+  "/hero_bg_2.png"
+];
+
 export const Hero = () => {
+  const [bgIndex, setBgIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % bgImages.length);
+    }, 6000); // 6 seconds for a slower, more cinematic fade
+    return () => clearInterval(timer);
+  }, []);
+
   return (
-    <section className="relative overflow-hidden bg-background pt-32 pb-16 md:pt-48 md:pb-32 min-h-[80vh] flex items-center">
-      {/* Background Image with Dark Overlay */}
+    <section className="relative overflow-hidden bg-background pt-32 pb-16 md:pt-48 md:pb-32 min-h-[85vh] flex items-center">
+      {/* Background Carousel */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/hero_bg.png"
-          alt="Studio Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-background/60" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+        {bgImages.map((src, i) => (
+          <div 
+            key={src}
+            className={`absolute inset-0 transition-opacity duration-[2000ms] ${
+              i === bgIndex ? "opacity-60" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={src}
+              alt="Studio Background"
+              fill
+              priority={i === 0}
+              className="object-cover"
+            />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-background/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background z-10" />
       </div>
 
       {/* Shaders / Blobs */}
