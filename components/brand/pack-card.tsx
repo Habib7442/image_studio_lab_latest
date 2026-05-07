@@ -71,5 +71,3 @@ export const PackCard = ({ pack, priority = false }: PackCardProps) => {
     </div>
   );
 };
-  );
-};
