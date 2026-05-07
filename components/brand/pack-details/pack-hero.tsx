@@ -94,15 +94,17 @@ export const PackHero = ({ pack }: { pack: any }) => {
               )}
               
               <div className="flex flex-wrap items-center gap-10">
-                <a
-                  href={pack.gumroadUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 rounded-full bg-foreground px-10 py-5 text-sm font-semibold text-background transition-all hover:bg-accent shrink-0"
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  Get the Pack
-                </a>
+                {pack.segment !== 'free' && (
+                  <a
+                    href={pack.gumroadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-full bg-foreground px-10 py-5 text-sm font-semibold text-background transition-all hover:bg-accent shrink-0"
+                  >
+                    <ShoppingCart className="h-4 w-4" />
+                    Get the Pack
+                  </a>
+                )}
 
                 <div className="flex flex-col gap-1">
                   <h6 className="text-[9px] font-bold uppercase tracking-[0.2em] text-foreground/40">Compatibility</h6>

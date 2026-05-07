@@ -36,7 +36,7 @@ export default function PacksPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <section className="py-24 md:py-32">
+      <section className="pt-16 pb-24 md:pt-20 md:pb-32">
         <div className="mx-auto max-w-7xl px-6">
           {/* Header */}
           <div className="mb-12 text-center">
@@ -66,8 +66,8 @@ export default function PacksPage() {
               </div>
             ) : (
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filteredPacks.map((pack) => (
-                  <PackCard key={pack._id} pack={pack} />
+                {filteredPacks.map((pack, index) => (
+                  <PackCard key={pack._id} pack={pack} priority={index < 2} />
                 ))}
               </div>
             )}

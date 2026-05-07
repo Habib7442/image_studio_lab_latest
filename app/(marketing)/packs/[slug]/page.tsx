@@ -32,24 +32,32 @@ export default async function PackPage({ params }: PageProps) {
           </div>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {pack.prompts?.map((prompt: any) => (
-              <PromptCard key={prompt._id} prompt={{ ...prompt, segment: pack.segment }} />
-            ))}
+            {pack.prompts && pack.prompts.length > 0 ? (
+              pack.prompts.map((prompt: any) => (
+                <PromptCard key={prompt._id} prompt={{ ...prompt, segment: pack.segment }} />
+              ))
+            ) : (
+              <div className="col-span-full py-20 text-center border border-dashed border-border rounded-lg">
+                <p className="text-muted font-serif italic text-lg">No generations added to this pack yet.</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Sticky Bottom CTA for Mobile */}
-      <div className="sticky bottom-0 z-40 border-t border-border bg-background/80 p-4 backdrop-blur-lg md:hidden">
-        <a
-          href={pack.gumroadUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex w-full items-center justify-center rounded-full bg-foreground py-4 text-sm font-semibold text-background"
-        >
-          Get Master Pack
-        </a>
-      </div>
+      {/* Sticky Bottom CTA for Mobile - Hidden for Free Packs */}
+      {pack.segment !== 'free' && (
+        <div className="sticky bottom-0 z-40 border-t border-border bg-background/80 p-4 backdrop-blur-lg md:hidden">
+          <a
+            href={pack.gumroadUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full items-center justify-center rounded-full bg-foreground py-4 text-sm font-semibold text-background"
+          >
+            Get Master Pack
+          </a>
+        </div>
+      )}
     </div>
   );
 }

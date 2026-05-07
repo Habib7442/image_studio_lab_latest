@@ -5,9 +5,15 @@ export const MODELS = [
 
 export const SEGMENTS = [
   {
-    id: "creators",
-    name: "Creators",
-    desc: "Editorial lighting and cinematic aesthetics for digital storytellers.",
+    id: "free",
+    name: "Free",
+    desc: "Premium samples to get you started with Zero Engineering.",
+    color: "#4A5D4E", // Accent
+  },
+  {
+    id: "paid",
+    name: "Paid",
+    desc: "Complete master-tested collections for production-grade results.",
     color: "#15110D", // Foreground
   },
 ];

@@ -28,11 +28,11 @@ export const FeaturedPacks = () => {
   if (!loading && packs.length === 0) return null;
 
   return (
-    <section className="bg-background py-24 border-t border-border">
+    <section className="bg-background pt-12 pb-24 md:pt-16 md:pb-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-16">
+        <div className="mb-12">
           <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
-            03 / Collections
+            Collections
           </span>
           <h2 className="mt-4 font-serif text-[clamp(40px,5vw,64px)] font-light leading-tight tracking-tight text-foreground">
             Master <em className="italic text-accent">Packs.</em>
@@ -48,8 +48,8 @@ export const FeaturedPacks = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {packs.map((pack) => (
-              <PackCard key={pack._id} pack={pack} />
+            {packs.map((pack, index) => (
+              <PackCard key={pack._id} pack={pack} priority={index === 0} />
             ))}
           </div>
         )}

@@ -30,36 +30,36 @@
 }
 
 :root {
-  /* Brand Palette */
-  --background: #F1EFEA; /* Sophisticated Warm Stone */
-  --foreground: #1A1C19; /* Deep Charcoal */
+  /* Obsidian Studio Palette - The 'Sexy' Unique Look */
+  --background: #0D0E10; /* Deep Obsidian */
+  --foreground: #FAF7F2; /* Soft Parchment */
   
-  --accent: #4A5D4E; /* Deep Forest Sage - The 'Sexy' Color */
-  --accent-foreground: #F1EFEA;
+  --accent: #E5B567; /* Burnished Gold */
+  --accent-foreground: #0D0E10;
   
   --gold: #C5A059;
-  --gold-foreground: #1A1C19;
+  --gold-foreground: #0D0E10;
   
-  --muted: #6B726B;
-  --muted-foreground: rgba(26, 28, 25, 0.6);
+  --muted: #8E918E;
+  --muted-foreground: rgba(250, 247, 242, 0.6);
   
-  --border: rgba(26, 28, 25, 0.08);
-  --input: rgba(26, 28, 25, 0.12);
-  --ring: #4A5D4E;
+  --border: rgba(250, 247, 242, 0.1);
+  --input: rgba(250, 247, 242, 0.15);
+  --ring: #E5B567;
   
-  --radius: 0.25rem; /* Editorial style uses smaller radius */
+  --radius: 0.25rem;
 
   /* Shadcn overrides */
-  --card: #FFFFFF;
-  --card-foreground: #1A1C19;
-  --popover: #FFFFFF;
-  --popover-foreground: #1A1C19;
-  --primary: #1A1C19;
-  --primary-foreground: #F1EFEA;
-  --secondary: #E5E2DC;
-  --secondary-foreground: #1A1C19;
+  --card: #151719;
+  --card-foreground: #FAF7F2;
+  --popover: #151719;
+  --popover-foreground: #FAF7F2;
+  --primary: #FAF7F2;
+  --primary-foreground: #0D0E10;
+  --secondary: #1C1F21;
+  --secondary-foreground: #FAF7F2;
   --destructive: #7B2D26;
-  --destructive-foreground: #F1EFEA;
+  --destructive-foreground: #FAF7F2;
 }
 
 .dark {
@@ -100,5 +100,68 @@
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif tracking-tight;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer utilities {
+  .noise-bg {
+    position: fixed;
+    inset: -200%;
+    z-index: 50;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.08; /* Slightly higher for dark mode */
+    pointer-events: none;
+    animation: noise 0.2s infinite;
+  }
+
+  @keyframes noise {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+    100% { transform: translate(5%, 0); }
+  }
+
+  .shader-blob {
+    position: absolute;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.2;
+    animation: drift 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
+  }
+
+  @keyframes drift {
+    from { transform: translate(-10%, -10%) scale(1); }
+    to { transform: translate(20%, 15%) scale(1.2) rotate(45deg); }
+  }
+
+  .animate-marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }

@@ -14,6 +14,7 @@ export const Footer = () => {
                 src="/logo.png" 
                 alt="Image Studio Lab" 
                 fill
+                sizes="128px"
                 className="object-contain object-left"
               />
             </Link>
@@ -30,8 +31,6 @@ export const Footer = () => {
             </h4>
             <ul className="space-y-4 text-sm font-medium text-muted">
               <li><Link href="/packs" className="hover:text-accent">Prompt Packs</Link></li>
-              <li><Link href="/try-free" className="hover:text-accent">Free Samples</Link></li>
-              <li><Link href="/how-it-works" className="hover:text-accent">How it Works</Link></li>
             </ul>
           </div>
 

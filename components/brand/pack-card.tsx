@@ -7,9 +7,10 @@ import { ArrowRight } from "lucide-react";
 
 interface PackCardProps {
   pack: any;
+  priority?: boolean;
 }
 
-export const PackCard = ({ pack }: PackCardProps) => {
+export const PackCard = ({ pack, priority = false }: PackCardProps) => {
   return (
     <Link 
       href={`/packs/${pack.slug.current}`}
@@ -23,6 +24,7 @@ export const PackCard = ({ pack }: PackCardProps) => {
             alt={pack.title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={priority}
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         )}
@@ -37,20 +39,20 @@ export const PackCard = ({ pack }: PackCardProps) => {
       </div>
 
       {/* Content */}
-      <div className="p-6">
+      <div className="p-6 relative z-10">
         <div className="mb-4">
-          <Badge className="bg-accent/10 text-accent hover:bg-accent/10 border-none uppercase text-[9px] tracking-widest font-bold">
+          <Badge className="bg-accent/5 text-accent hover:bg-accent/10 border border-accent/10 uppercase text-[9px] tracking-widest font-bold backdrop-blur-sm transition-colors">
             {pack.segment}
           </Badge>
         </div>
         
-        <h3 className="font-serif text-xl font-medium leading-tight text-foreground transition-colors group-hover:text-accent">
+        <h3 className="font-serif text-xl font-medium leading-tight text-foreground transition-all duration-300 group-hover:text-accent group-hover:translate-x-1">
           {pack.title}
         </h3>
         
-        <div className="mt-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted transition-colors group-hover:text-foreground">
+        <div className="mt-6 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-muted transition-all duration-300 group-hover:text-foreground group-hover:gap-3">
           Explore Contents
-          <ArrowRight className="h-3 w-3" />
+          <ArrowRight className="h-3 w-3 transition-transform group-hover:scale-110" />
         </div>
       </div>
     </Link>

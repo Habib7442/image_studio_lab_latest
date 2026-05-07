@@ -27,7 +27,8 @@ export const pack = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Creators", value: "creators" },
+          { title: "Free", value: "free" },
+          { title: "Paid", value: "paid" },
         ],
       },
       validation: (Rule) => Rule.required(),
