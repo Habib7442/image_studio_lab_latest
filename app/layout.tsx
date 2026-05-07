@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { SmoothScroll } from "@/components/brand/smooth-scroll";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -74,7 +75,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <div className="noise-bg" aria-hidden="true" />
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

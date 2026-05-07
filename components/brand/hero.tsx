@@ -36,6 +36,8 @@ export const Hero = () => {
               alt="Studio Background"
               fill
               priority={i === 0}
+              quality={85}
+              sizes="100vw"
               className="object-cover object-[75%_center] md:object-center"
             />
           </div>
