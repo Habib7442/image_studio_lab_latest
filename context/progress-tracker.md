@@ -59,8 +59,7 @@
 - **Mobile UX Refinement**: Resolved layout overlap on mobile by adjusting container padding to accommodate the sticky 'Get Master Pack' CTA, and enhanced the drawer with a high-visibility, touch-friendly close button for easier navigation.
 - **Visual Flow Optimization**: Tightened vertical spacing between the Hero and Gallery sections to create a more cohesive, high-end editorial rhythm.
 - **Visual Identity Update**: Updated the site's Open Graph and Twitter metadata to use `og.png` for a consistent social sharing experience.
-
-
+- **SEO & Coverage Fix**: Addressed issues from the coverage report by implementing a dynamic `sitemap.ts`, `robots.ts`, canonical tags, and page-specific metadata for all marketing routes.
 
 
 

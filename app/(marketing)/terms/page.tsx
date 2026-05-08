@@ -1,4 +1,10 @@
 import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Review the terms and conditions for using Image Studio Lab products and services.",
+};
 
 export default function TermsPage() {
   const lastUpdated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });

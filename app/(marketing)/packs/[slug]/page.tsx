@@ -1,9 +1,31 @@
 import React from "react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/lib/sanity/client";
+import { client, urlFor } from "@/lib/sanity/client";
 import { singlePackQuery } from "@/lib/sanity/queries";
 import { PackHero } from "@/components/brand/pack-details/pack-hero";
 import { PromptCard } from "@/components/brand/prompt-card";
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const pack = await client.fetch(singlePackQuery, { slug });
+
+  if (!pack) {
+    return {
+      title: "Pack Not Found",
+    };
+  }
+
+  return {
+    title: `${pack.title} — Master AI Prompt Pack`,
+    description: pack.description || `Explore the ${pack.title} collection of master-tested AI prompts. Editorial-grade results for ChatGPT and Gemini.`,
+    openGraph: {
+      title: pack.title,
+      description: pack.description,
+      images: pack.coverImage ? [{ url: urlFor(pack.coverImage).width(1200).height(630).url() }] : [],
+    },
+  };
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

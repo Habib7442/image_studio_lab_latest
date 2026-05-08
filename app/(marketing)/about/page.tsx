@@ -2,10 +2,16 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Metadata } from "next";
 
 import { client } from "@/lib/sanity/client";
 import { allPacksQuery } from "@/lib/sanity/queries";
 import { PacksCarousel } from "@/components/brand/packs-carousel";
+
+export const metadata: Metadata = {
+  title: "Our Vision — The Art of Zero Engineering",
+  description: "Learn about the philosophy behind Image Studio Lab and our minimalist approach to editorial AI prompt engineering.",
+};
 
 export default async function AboutPage() {
   const packs = await client.fetch(allPacksQuery);
