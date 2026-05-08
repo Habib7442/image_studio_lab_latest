@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Image Studio Lab",
     images: [
       {
-        url: "/hero_bg.png", // Using the beautiful studio background as OG
+        url: "/og.png", // Using the beautiful studio background as OG
         width: 1200,
         height: 630,
         alt: "Image Studio Lab — Master Prompts",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Image Studio Lab — Master Prompts. Beautiful AI Images.",
     description: "Master-tested prompt packs for ChatGPT and Gemini. No prompt engineering required.",
-    images: ["/hero_bg.png"],
+    images: ["/og.png"],
   },
   robots: {
     index: true,

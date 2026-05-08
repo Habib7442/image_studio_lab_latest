@@ -58,6 +58,7 @@
 - **Master Prompt Optimization**: Enhanced the Master Prompt section with a scrollable container to prevent overflow, improved text legibility, and a high-visibility 'Copy Prompt' action.
 - **Mobile UX Refinement**: Resolved layout overlap on mobile by adjusting container padding to accommodate the sticky 'Get Master Pack' CTA, and enhanced the drawer with a high-visibility, touch-friendly close button for easier navigation.
 - **Visual Flow Optimization**: Tightened vertical spacing between the Hero and Gallery sections to create a more cohesive, high-end editorial rhythm.
+- **Visual Identity Update**: Updated the site's Open Graph and Twitter metadata to use `og.png` for a consistent social sharing experience.
 
 
 
