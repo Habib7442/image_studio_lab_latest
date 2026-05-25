@@ -22,7 +22,24 @@
 - [x] Fix hydration mismatch error caused by browser extensions.
 - [x] Refactor root layout to use route groups (isolated Sanity Studio).
 - [x] Fix `AbortError` and modernize Sanity config (v5 structures).
-- [ ] Setting up the first Unit Spec (`01-foundations`).
+- [x] Setting up the first Unit Spec (`01-foundations`).
+- [x] Created dynamic brand catalogue route at `/catalogues/[businessName]`.
+- [x] Built interactive 3D Flipbook component with custom Web Audio page-flip synthesis.
+- [x] Added dynamic hotspots with detail popovers for lookbooks.
+- [x] Created premium client booking inquiry drawer.
+- [x] Generated high-end fashion illustration `5.png` for the lookbook spread.
+- [x] Refactored 3D flipbook animation to enable centering translations.
+- [x] Corrected leaf rotation origin to 'left' to enable smooth opening on both sides.
+- [x] Added split binder cover shell styling to prevent visual leaks during closed states.
+- [x] Set strict backface-visibility and translateZ(0) to prevent overflow bleed-throughs.
+- [x] Applied direct nested rounded corners (rounded-l-xl/rounded-r-xl) to image containers, images, and highlights to prevent corner bleed-outs on rounded book pages.
+- [x] Optimized editorial page spacing, vertical gaps, and font scale ratios to prevent quote block truncation and ensure 100% text visibility.
+- [x] Corrected 3D Z-axis translation (`translateZ`) signs for flipped sheets to account for coordinate negation during Y-axis rotation, fixing the stacked page order on the left page.
+- [x] Implemented native, hardware-accelerated touch swipe gestures (`onTouchStart`, `onTouchMove`, `onTouchEnd`) for mobile carousels to enable fluid drag page turns.
+
+
+
+
 
 ## Next Up
 - [ ] Unit 01: Core Layout & Navigation.
