@@ -53,6 +53,11 @@
 - [x] Created dynamic detailed `lib/seo.ts` utility defining production canonicals (`https://www.imagestudiolab.com`), Google Search Console verifications, and structured Schema.org JSON-LD scripts (Organization, WebSite, Catalog).
 - [x] Bound default layout, dynamic lookbook page, and homepage renders to dynamic SEO and JSON-LD schema blocks.
 - [x] Hided default "Folio" / "FOLIO" branding labels across homepage grids, margins, lookbooks, and previews to only show titles/names.
+- [x] Secured image upload API route with a Clerk auth gate, batch caps, size limits, dynamic mime-type file extensions, and custom Next.js request body parser limits to support up to 10MB payloads.
+- [x] Neutralized Reflected XSS risks inside JSON-LD blocks using unicode character escaping.
+- [x] Filtered public catalogs on the homepage and about page using a new schema `isPublic` flag, preventing private draft leaks, and relaxed save catalog validations to make only Catalogue Title required.
+- [x] Aligned client-side image size limit checks (reference uploads & sheet editor uploads) in the dashboard UI to support up to 10MB files.
+- [x] Committed and pushed all refinements successfully to remote GitHub origin repository.
 
 
 ## In Progress
