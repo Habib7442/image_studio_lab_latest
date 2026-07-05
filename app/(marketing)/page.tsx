@@ -21,7 +21,7 @@ interface PublicCatalog {
  */
 async function getPublicCatalogs(): Promise<PublicCatalog[]> {
   try {
-    const query = `*[_type == "catalog"] | order(_createdAt desc) {
+    const query = `*[_type == "catalog" && isPublic == true] | order(_createdAt desc) {
       _id,
       title,
       subtitle,
@@ -77,11 +77,11 @@ export default async function HomePage() {
       {/* Schema.org Structured Data for Google Search Console */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema).replace(/</g, "\\u003c") }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }}
       />
 
       {/* Decorative Background Glows */}

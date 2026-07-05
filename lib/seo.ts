@@ -53,9 +53,9 @@ export const BASE_SEO = {
     images: ["/og-image.png"],
     creator: "@imagestudiolab"
   },
-  verification: {
-    google: "google-site-verification-placeholder-code-will-be-injected" // Google Search Console verification meta tag
-  }
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined
 };
 
 interface MetadataOptions {

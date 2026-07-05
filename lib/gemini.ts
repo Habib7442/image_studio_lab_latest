@@ -212,99 +212,102 @@ export const FALLBACK_CATALOGS: Record<string, any> = {
 };
 
 // Response schema for Google Gemini API structured output
-const catalogResponseSchema = {
-  type: "OBJECT",
-  properties: {
-    title: {
-      type: "STRING",
-      description: "The primary headline/title of the publication catalog. Max 6 words.",
-    },
-    subtitle: {
-      type: "STRING",
-      description: "A luxury editorial, magazine-style subtitle. Max 8 words.",
-    },
-    brandName: {
-      type: "STRING",
-      description: "The name of the business/brand generating this catalog.",
-    },
-    pages: {
-      type: "ARRAY",
-      minItems: 6,
-      maxItems: 6,
-      description: "A list of pages in the catalog. Must contain EXACTLY 6 pages. Page 1 is always the Cover (image layout), Page 2 is always the Editorial Introduction (editorial layout), Pages 3-5 are Image Showcases (image layout), and Page 6 is always the Epilogue/Back Cover (image layout).",
-      items: {
-        type: "OBJECT",
-        properties: {
-          type: {
-            type: "STRING",
-            enum: ["image", "editorial"],
-            description: "The page layout style.",
-          },
-          src: {
-            type: "STRING",
-            description: "An absolute Unsplash image URL. Pick from the curated pool in the prompt depending on the brand category (e.g. fashion, pottery, or jewelry). Pick a unique image for each page.",
-          },
-          title: {
-            type: "STRING",
-            description: "The title of this page. Max 4 words.",
-          },
-          subtitle: {
-            type: "STRING",
-            description: "The subtitle or label of this page. Max 5 words.",
-          },
-          content: {
-            type: "STRING",
-            description: "Detailed editorial paragraph. REQUIRED only if type is 'editorial'. Make it sound extremely professional, luxurious, and slow-crafted. Max 80 words.",
-          },
-          quote: {
-            type: "STRING",
-            description: "A beautiful, inspirational quote on beauty, art, design, or simplicity. Only applicable if type is 'editorial'.",
-          },
-          quoteAuthor: {
-            type: "STRING",
-            description: "The author of the quote.",
-          },
-          hotspots: {
-            type: "ARRAY",
-            description: "List of product hotspots placed on the catalog page. Only applicable if type is 'image'. Max 2 hotspots per page.",
-            items: {
-              type: "OBJECT",
-              properties: {
-                x: {
-                  type: "STRING",
-                  description: "Percentage X-coordinate from left (e.g. '30%', '55%', '65%'). Keep away from edges.",
+// Response schema for Google Gemini API structured output dynamically built per target page count
+function getCatalogResponseSchema(targetPageCount: number) {
+  return {
+    type: "OBJECT",
+    properties: {
+      title: {
+        type: "STRING",
+        description: "The primary headline/title of the publication catalog. Max 6 words.",
+      },
+      subtitle: {
+        type: "STRING",
+        description: "A luxury editorial, magazine-style subtitle. Max 8 words.",
+      },
+      brandName: {
+        type: "STRING",
+        description: "The name of the business/brand generating this catalog.",
+      },
+      pages: {
+        type: "ARRAY",
+        minItems: targetPageCount,
+        maxItems: targetPageCount,
+        description: `A list of pages in the catalog. Must contain EXACTLY ${targetPageCount} pages. Page 1 is always the Cover (image layout), Page 2 is always the Editorial Introduction (editorial layout), Pages 3 to ${targetPageCount - 1} are Image Showcases (image layout), and Page ${targetPageCount} is always the Epilogue/Back Cover (image layout).`,
+        items: {
+          type: "OBJECT",
+          properties: {
+            type: {
+              type: "STRING",
+              enum: ["image", "editorial"],
+              description: "The page layout style.",
+            },
+            src: {
+              type: "STRING",
+              description: "An absolute Unsplash image URL. Pick from the curated pool in the prompt depending on the brand category (e.g. fashion, pottery, or jewelry). Pick a unique image for each page.",
+            },
+            title: {
+              type: "STRING",
+              description: "The title of this page. Max 4 words.",
+            },
+            subtitle: {
+              type: "STRING",
+              description: "The subtitle or label of this page. Max 5 words.",
+            },
+            content: {
+              type: "STRING",
+              description: "Detailed editorial paragraph. REQUIRED only if type is 'editorial'. Make it sound extremely professional, luxurious, and slow-crafted. Max 80 words.",
+            },
+            quote: {
+              type: "STRING",
+              description: "A beautiful, inspirational quote on beauty, art, design, or simplicity. Only applicable if type is 'editorial'.",
+            },
+            quoteAuthor: {
+              type: "STRING",
+              description: "The author of the quote.",
+            },
+            hotspots: {
+              type: "ARRAY",
+              description: "List of product hotspots placed on the catalog page. Only applicable if type is 'image'. Max 2 hotspots per page.",
+              items: {
+                type: "OBJECT",
+                properties: {
+                  x: {
+                    type: "STRING",
+                    description: "Percentage X-coordinate from left (e.g. '30%', '55%', '65%'). Keep away from edges.",
+                  },
+                  y: {
+                    type: "STRING",
+                    description: "Percentage Y-coordinate from top (e.g. '25%', '40%', '70%').",
+                  },
+                  title: {
+                    type: "STRING",
+                    description: "The product item name. Max 3 words.",
+                  },
+                  description: {
+                    type: "STRING",
+                    description: "An elegant description emphasizing quality, craftsmanship, and materials. Max 15 words.",
+                  },
+                  price: {
+                    type: "STRING",
+                    description: "Product price (e.g., '$85', '$240', '$450').",
+                  },
+                  linkText: {
+                    type: "STRING",
+                    description: "Action CTA label (e.g. 'View Product', 'Explore Pack').",
+                  },
                 },
-                y: {
-                  type: "STRING",
-                  description: "Percentage Y-coordinate from top (e.g. '25%', '40%', '70%').",
-                },
-                title: {
-                  type: "STRING",
-                  description: "The product item name. Max 3 words.",
-                },
-                description: {
-                  type: "STRING",
-                  description: "An elegant description emphasizing quality, craftsmanship, and materials. Max 15 words.",
-                },
-                price: {
-                  type: "STRING",
-                  description: "Product price (e.g., '$85', '$240', '$450').",
-                },
-                linkText: {
-                  type: "STRING",
-                  description: "Action CTA label (e.g. 'View Product', 'Explore Pack').",
-                },
+                required: ["x", "y", "title", "description", "price", "linkText"],
               },
-              required: ["x", "y", "title", "description", "price", "linkText"],
             },
           },
+          required: ["type", "title", "subtitle"],
         },
-        required: ["type", "title", "subtitle"],
       },
     },
-  },
-  required: ["title", "subtitle", "brandName", "pages"],
-};
+    required: ["title", "subtitle", "brandName", "pages"],
+  };
+}
 
 /**
  * Generates an interactive editorial catalog using the Google Gemini 1.5 Flash API
@@ -448,7 +451,7 @@ export async function generateCatalogLayout(
       },
       generationConfig: {
         responseMimeType: "application/json",
-        responseSchema: catalogResponseSchema,
+        responseSchema: getCatalogResponseSchema(targetPageCount),
         temperature: 0.7
       }
     };

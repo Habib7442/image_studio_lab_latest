@@ -101,7 +101,7 @@ export default async function LookbookPage({ params }: LookbookPageProps) {
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogJsonLd).replace(/</g, "\\u003c") }}
       />
       {/* Dynamic light accent matching preset styling */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(184,137,62,0.06)_0%,transparent_60%)] pointer-events-none z-0" />
@@ -132,7 +132,7 @@ export default async function LookbookPage({ params }: LookbookPageProps) {
 
       {/* Corporate Booking Form / Lead generation funnel */}
       <section id="inquiry-stage" className="mx-auto max-w-7xl px-4 md:px-6 relative z-10 border-t border-white/5 bg-[#1C1814]/30 rounded-3xl overflow-hidden">
-        <CatalogueBooking businessName={catalog.brandName.toLowerCase().replace(/\s+/g, "-")} />
+        <CatalogueBooking businessName={catalog.brandName ? catalog.brandName.toLowerCase().replace(/\s+/g, "-") : "image-studio-lab"} />
       </section>
     </div>
   );

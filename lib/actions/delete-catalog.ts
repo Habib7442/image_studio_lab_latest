@@ -19,7 +19,7 @@ export async function deleteCatalogAction(id: string): Promise<DeleteCatalogResp
   }
 
   try {
-    console.log(`[Server Action] Deleting lookbook ID "${id}" for User: ${userId}...`);
+    console.log(`[Server Action] Deleting lookbook ID "${id}"...`);
     
     // Verify ownership before deleting!
     const existing = await writeClient.fetch(`*[_type == "catalog" && _id == $id][0]`, { id });

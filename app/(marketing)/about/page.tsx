@@ -21,7 +21,7 @@ async function getMixedSanityImages() {
       coverImage
     }`;
     
-    const catalogsQuery = `*[_type == "catalog"] {
+    const catalogsQuery = `*[_type == "catalog" && isPublic == true] {
       _id,
       title,
       pagesJson

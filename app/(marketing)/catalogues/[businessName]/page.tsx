@@ -194,7 +194,7 @@ export default async function CataloguePage({ params }: PageProps) {
         "url": "https://imagestudiolab.com/logo.png"
       }
     },
-    "datePublished": new Date().toISOString(),
+    "datePublished": "2026-03-24T00:00:00.000Z",
     "genre": "Catalog",
     "creativeWorkStatus": "Published"
   };
@@ -204,7 +204,7 @@ export default async function CataloguePage({ params }: PageProps) {
       {/* Schema.org Structured Data */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
       {/* Showroom Header */}
       <header className="relative py-12 md:py-16 text-center overflow-hidden">

@@ -174,10 +174,16 @@ export async function generateCatalogAction(
       fallbackCatalog.brandName = cleanBrandName || fallbackCatalog.brandName;
     }
 
+    const isQuotaExceeded = error?.message?.includes("429") || error?.status === 429 || JSON.stringify(error).includes("429");
+    const errorDetail = error?.message || "Unknown issue";
+    const userWarning = isQuotaExceeded
+      ? "Gemini API quota exceeded (status 429). We recovered by generating a fallback layout with your uploaded images."
+      : `AI Generation failed (${errorDetail}). We recovered by generating a fallback layout with your uploaded images.`;
+
     return {
       success: true, // Gracefully recovered
       data: fallbackCatalog,
-      error: `Gemini API quota exceeded (status 429). We recovered by generating a fallback layout with your uploaded images.`,
+      error: userWarning,
     };
   }
 }

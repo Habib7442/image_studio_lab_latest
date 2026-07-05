@@ -37,6 +37,12 @@ export const catalog = defineType({
       type: "string",
     }),
     defineField({
+      name: "isPublic",
+      title: "Is Public / Published",
+      type: "boolean",
+      initialValue: true,
+    }),
+    defineField({
       name: "views",
       title: "Total Views",
       type: "number",

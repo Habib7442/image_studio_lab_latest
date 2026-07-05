@@ -77,7 +77,7 @@ export const Navbar = () => {
           <div className="flex items-center gap-4">
             <Show when="signed-out">
               <SignInButton mode="modal">
-                <button className="text-xs font-bold uppercase tracking-widest text-muted transition-colors hover:text-lime-400 cursor-pointer">
+                <button className="hidden text-xs font-bold uppercase tracking-widest text-muted transition-colors hover:text-lime-400 md:inline-block cursor-pointer">
                   Sign In
                 </button>
               </SignInButton>
@@ -95,7 +95,9 @@ export const Navbar = () => {
                 AI Workspace
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-              <UserButton />
+              <div className="hidden md:block">
+                <UserButton />
+              </div>
             </Show>
 
             {/* Mobile Sheet Navigation */}

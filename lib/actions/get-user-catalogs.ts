@@ -19,7 +19,7 @@ export async function getUserCatalogsAction(): Promise<UserCatalogsResponse> {
       return { success: false, error: "Unauthorized. Please sign in to fetch publications." };
     }
 
-    console.log(`[Server Action] Fetching saved lookbooks for authenticated user: ${userId}`);
+    console.log(`[Server Action] Fetching saved lookbooks for authenticated user...`);
     const query = `*[_type == "catalog" && userId == $userId] | order(_createdAt desc) {
       _id,
       title,

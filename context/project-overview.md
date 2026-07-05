@@ -37,4 +37,4 @@
 ## Success Criteria
 - Time-to-first-draft under 120 seconds.
 - Lighthouse SEO score of 100 on published documents.
-- Under 50ms canvas interaction latency.
+- Under 50ms viewer/editor interaction latency.

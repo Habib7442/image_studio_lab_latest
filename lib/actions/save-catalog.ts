@@ -19,6 +19,7 @@ export async function saveCatalogAction(
     brandName: string;
     palettePreset: string;
     pages: any[];
+    isPublic?: boolean;
   },
   catalogId?: string
 ): Promise<SaveCatalogResponse> {
@@ -38,6 +39,7 @@ export async function saveCatalogAction(
       brandName: catalogData.brandName,
       palettePreset: catalogData.palettePreset,
       pagesJson: JSON.stringify(catalogData.pages),
+      isPublic: catalogData.isPublic !== undefined ? catalogData.isPublic : true,
     };
 
     let resultId = catalogId;
