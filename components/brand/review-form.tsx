@@ -63,7 +63,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
   if (isSuccess) {
     return (
       <div className="flex flex-col items-center justify-center py-12 text-center animate-in fade-in zoom-in duration-500">
-        <CheckCircle2 className="h-16 w-16 text-accent mb-4" />
+        <CheckCircle2 className="h-16 w-16 text-lime-400 mb-4" />
         <h3 className="font-serif text-2xl italic text-foreground">Thank you for your feedback!</h3>
         <p className="mt-2 text-muted max-w-xs">
           Your review has been submitted and is currently pending moderation.
@@ -71,7 +71,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
         <div className="mt-8 flex flex-col items-center gap-4">
           <button 
             onClick={() => setIsSuccess(false)}
-            className="text-sm font-semibold uppercase tracking-widest text-accent hover:text-foreground transition-colors"
+            className="text-sm font-bold uppercase tracking-widest text-lime-400 hover:text-lime-300 transition-colors"
           >
             Submit Another
           </button>
@@ -87,13 +87,13 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto border border-border/50 bg-background/50 backdrop-blur-xl rounded-2xl p-8 md:p-12 shadow-2xl">
+    <div className="w-full max-w-2xl mx-auto border border-white/5 bg-[#121215] rounded-2xl p-8 md:p-12 shadow-2xl">
       <div className="mb-10 text-center">
-        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-lime-400">
           Feedback
         </span>
         <h2 className="mt-3 font-serif text-3xl font-light tracking-tight text-foreground">
-          Leave a <em className="italic text-accent">Review.</em>
+          Leave a <em className="italic text-lime-400 font-serif font-normal">Review.</em>
         </h2>
         {packTitle && (
           <p className="mt-2 text-muted italic font-serif">
@@ -106,12 +106,13 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
         {/* Avatar Upload (Optional) */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative group">
-            <div className="relative h-24 w-24 overflow-hidden rounded-full border-2 border-dashed border-border bg-card/50 flex items-center justify-center transition-all group-hover:border-accent/50">
+            <div className="relative h-24 w-24 overflow-hidden rounded-full border border-2 border-dashed border-white/10 bg-[#09090B] flex items-center justify-center transition-all group-hover:border-lime-400/50">
               {avatarPreview ? (
                 <Image 
                   src={avatarPreview} 
                   alt="Avatar Preview" 
                   fill 
+                  sizes="96px"
                   className="object-cover"
                 />
               ) : (
@@ -123,11 +124,11 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
               type="button"
               onClick={() => avatarPreview ? removeAvatar() : fileInputRef.current?.click()}
               className={cn(
-                "absolute -bottom-2 -right-2 p-2 rounded-full border border-border bg-background shadow-lg transition-all hover:scale-110",
-                avatarPreview ? "text-red-400 hover:bg-red-500/10" : "text-accent hover:bg-accent/10"
+                "absolute -bottom-2 -right-2 p-2 rounded-full border border-white/5 bg-[#121215] shadow-lg transition-all hover:scale-110",
+                avatarPreview ? "text-red-400 hover:bg-red-500/10" : "text-lime-400 hover:bg-lime-400/10"
               )}
             >
-              {avatarPreview ? <X className="h-4 w-4" /> : <Upload className="h-4 w-4" />}
+              {avatarPreview ? <X className="h-4 w-4" /> : <Upload className="h-4 w-4 text-lime-400" />}
             </button>
           </div>
           <input 
@@ -162,7 +163,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
                   className={cn(
                     "h-8 w-8 transition-all duration-300",
                     (hover || rating) >= star
-                      ? "fill-accent text-accent filter drop-shadow-[0_0_8px_rgba(229,181,103,0.4)]"
+                      ? "fill-lime-400 text-lime-400 filter drop-shadow-[0_0_8px_rgba(163,230,53,0.4)]"
                       : "text-muted/20"
                   )}
                 />
@@ -183,7 +184,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
               name="name"
               required
               placeholder="e.g. Julian Kane"
-              className="w-full bg-white/5 border border-border/50 rounded-xl px-4 py-4 text-sm text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-muted/30"
+              className="w-full bg-[#09090B] border border-white/5 rounded-xl px-4 py-4 text-sm text-foreground focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400/20 transition-all placeholder:text-muted/30 font-sans"
             />
           </div>
 
@@ -192,7 +193,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
             <label className="text-[10px] font-bold uppercase tracking-widest text-muted/60 ml-1">
               Verification
             </label>
-            <div className="w-full bg-white/5 border border-border/50 rounded-xl px-4 py-4 text-sm text-muted/30 italic">
+            <div className="w-full bg-[#09090B] border border-white/5 rounded-xl px-4 py-4 text-sm text-muted/30 italic font-sans">
               Verified Purchase
             </div>
           </div>
@@ -209,7 +210,7 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
             required
             rows={4}
             placeholder="Share your experience with these prompts..."
-            className="w-full bg-white/5 border border-border/50 rounded-xl px-4 py-4 text-sm text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all placeholder:text-muted/30 resize-none"
+            className="w-full bg-[#09090B] border border-white/5 rounded-xl px-4 py-4 text-sm text-foreground focus:outline-none focus:border-lime-400 focus:ring-1 focus:ring-lime-400/20 transition-all placeholder:text-muted/30 resize-none font-sans"
           />
         </div>
 
@@ -223,8 +224,8 @@ export function ReviewForm({ packId, packTitle }: ReviewFormProps) {
           className={cn(
             "group relative w-full flex items-center justify-center gap-3 rounded-xl px-8 py-5 text-sm font-bold uppercase tracking-widest transition-all overflow-hidden",
             isSubmitting || rating === 0
-              ? "bg-muted/10 text-muted/40 cursor-not-allowed"
-              : "bg-foreground text-background hover:bg-accent hover:shadow-[0_0_30px_rgba(229,181,103,0.3)] active:scale-[0.98]"
+              ? "bg-white/5 text-muted/40 cursor-not-allowed border border-white/5"
+              : "bg-lime-400 text-black hover:bg-lime-300 hover:shadow-[0_0_30px_rgba(163,230,53,0.25)] active:scale-[0.98]"
           )}
         >
           <span className="relative z-10 flex items-center gap-3">

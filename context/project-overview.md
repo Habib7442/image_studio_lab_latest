@@ -1,41 +1,40 @@
-# Project Overview — imagestudiolab.com
+# Project Overview — Folio (imagestudiolab.com)
 
-**imagestudiolab.com** is a premium digital prompt-pack store providing curated, copy-paste AI prompt systems for non-technical creators, sellers, and fans.
+**Folio** is the AI-native publishing platform that turns any text brief, PDF, or product list into a polished, interactive, shoppable digital catalog in minutes instead of weeks.
 
 ## Goals
-1.  **Simplify AI Creation**: Eliminate the need for prompt engineering by providing "Master Director" systems.
-2.  **Premium Editorial Positioning**: Stand out from generic marketplaces with a high-end, magazine-coded brand.
-3.  **Multi-Segment Reach**: Serve Sellers, Creators, Fans (Cricket/Bollywood), and Professionals under one brand.
-4.  **Ship-Fast MVP**: Launch with 3-4 high-quality packs.
+1.  **Democratize Creative Authoring**: Empower marketing teams to generate editorial-grade 3D publications from a simple natural-language brief.
+2.  **Break Incumbent Stagnation**: Replace heavy, unindexable, canvas-rendered flipbooks (e.g. Flipsnack, Issuu) with lighting-fast, SEO-indexable HTML viewers.
+3.  **Drive Pipeline Revenue**: Seamlessly embed shoppable product hotspots bound to Shopify SKU inventory and custom lead-gen forms mapping directly to CRM platforms.
+4.  **Enforce Brand Integrity**: Enforce custom brand guidelines (logo, colors, type tokens, voice) directly in the LLM generation logic to guarantee on-brand outcomes.
 
 ## Core User Flow
-1.  **Discover**: User arrives via social media (Instagram Cricket Reels, Pinterest, TikTok) or SEO.
-2.  **Sample**: User tries a "Free Prompt" landing page to see the quality.
-3.  **Purchase**: User clicks "Buy" and is redirected to **Gumroad** for checkout and immediate file delivery.
-4.  **Implement**: User copies the "Master Director" system prompt into ChatGPT or Gemini, followed by specific pack prompts.
+1.  **Brief**: User arrives at Folio, selects their brand kit preferences, and types a simple brief outlining their catalog's goal.
+2.  **Generate**: Folio calls the Google Gemini API to analyze instructions and construct a structured layout JSON in under 90 seconds.
+3.  **Interact**: The system instantly renders an editorial 3D Flipbook viewer populated with dynamic product hotspots, Web Audio paper-flip synthesis, and lead capture.
+4.  **Publish**: The user customizes, reviews, and publishes the document, securing a highly responsive custom domain link.
 
 ## Features (MVP)
-- **Pack Catalog**: Filterable library of prompt packs.
-- **Pack Detail Pages**: Visual showcases of sample outputs, "what's inside," and pricing.
-- **Free Prompts Hub**: Landing pages for individual free prompts to drive SEO and trust.
-- **Lifetime Studio Vault**: A high-scarcity sales page for the "Founder's Lifetime" offer.
-- **Email Lead Magnet**: Integration with ConvertKit for delivering a "Master Director" starter PDF.
+-  **AI Brief Input → Structured JSON Layout**: Generates multi-page editorial catalog schemas matching custom parameters.
+-  **Real HTML 3D Flipbook**: Responsive page transitions powered by 3D CSS transforms and touch gestures, fully indexable by search engines.
+-  **Shoppable hotspots**: Connect product entries (names, prices, descriptions) dynamically with interactive overlays.
+-  **Audio Synthesis**: Web Audio API paper friction audio matching page-flip motion.
+-  **Brand Kit Enforcer**: Constrains LLM outputs and layout assets to predefined color tokens and typography.
 
-## In-Scope (Phase 1)
-- Next.js 16 App Router implementation.
-- Mobile-responsive, editorial-grade UI.
-- Gumroad purchase redirection.
-- 4 initial packs: Cricketer Selfie, Product Photoshoot, Memory Lane, Cinematic Lighting.
-- 20 free prompt landing pages.
+## In-Scope (Phase 1 MVP)
+- Next.js App Router workspace implementation.
+- Official `@google/genai` JS SDK pipeline.
+- Interactive homepage editor workspace.
+- Responsive, hardware-accelerated 3D Flipbook renderer.
+- Custom Web Audio paper synth engine.
 
-## Out-of-Scope (Phase 1)
-- User accounts / Personal login.
-- Custom payment gateway integration (Stripe/Paypal directly).
-- Live AI generation on-site.
-- Community gallery.
-- Mobile application.
+## Out-of-Scope (Phase 1 MVP)
+- Multi-editor live CRDT collab.
+- Real-time video/audio embeds.
+- Direct Stripe subscription billing.
+- Self-hosted visual asset generation.
 
 ## Success Criteria
-- Site performance (Lighthouse) > 90.
-- Seamless "Copy to Clipboard" functionality for prompts.
-- Clear conversion path from Free Prompt → Paid Pack.
+- Time-to-first-draft under 120 seconds.
+- Lighthouse SEO score of 100 on published documents.
+- Under 50ms canvas interaction latency.

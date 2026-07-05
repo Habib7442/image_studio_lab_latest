@@ -1,87 +1,65 @@
-# Progress Tracker — imagestudiolab.com
+# Progress Tracker — Folio (imagestudiolab.com)
 
 ## Current Phase
-- **Phase 0: Foundation & Context Setup**
+- **Phase 1: Folio AI-Native Prototyping**
 
 ## Current Goal
-- Establish the Six-File Context system and initial project styling.
+- Establish the Google Gemini SDK generation pipeline and render real-time generated 3D catalogs directly on the interactive workspace homepage.
 
 ## Completed
-- [x] Review PRD and Reference HTML.
-- [x] Setup `context/` directory.
-- [x] Define `project-overview.md`.
-- [x] Define `architecture.md`.
-- [x] Define `ui-context.md`.
-- [x] Define `code-standards.md`.
-- [x] Define `ai-workflow-rules.md`.
+- [x] Review new PRD specifications.
+- [x] Align Six-File context structure with the Folio product transition.
+- [x] Evolve branding guidelines (`ui-context.md`) to Folio Editorial Red-Orange style.
+- [x] Define catalog generation layout pipeline in `architecture.md`.
+- [x] Retain high-end interactive 3D Flipbook engine and sound synthesis foundations from previous prototyping.
+- [x] Define direct HTTP API call client wrapper (gemini-3.5-flash) in `lib/gemini.ts`.
+- [x] Create Next.js Server Action `lib/actions/generate-catalog.ts` with strict JSON Schema outputs.
+- [x] Move catalog generation workspace to new `/dashboard` route.
+- [x] Redesign landing page `/` as marketing page with pre-loaded demo.
+- [x] Integrate multi-image reference uploader (Vision processing and concurrent Sanity hosting).
+- [x] Create 'Exclude Text' toggle for minimalist visual lookbooks.
+- [x] Add client-side download overlays on flipbook image pages.
+- [x] Enforce factual news editorial copywriting (e.g. Deepika Padukone, 82°E, Cartier) instead of dummy copy.
+- [x] Support YouTube video embeds inside inner sheets and outbound call-to-action (CTA) link overlays.
+- [x] Replace hardcoded footer texts with dynamic brand collection labels.
+- [x] Expand brand styling presets to include "Royal Indigo" and "Monochrome Silk".
+- [x] Build Lookbook Real-Time Sheet Editor to customize text, quote, video, images (Image 1 & 2), and hotspot coordinates.
+- [x] Build Sanity Cloud Saving pipeline with copyable public URL lookbook viewers (e.g. /lookbook/[id]).
+- [x] Implement intelligent image distribution mapping (split-page side-by-side layout when uploaded images exceed book slots).
+- [x] Limit default outbound CTA buttons to a single target page to prevent page-duplication.
+- [x] Bypassed Next.js RSC serialization limits for image uploads by building API Route Handler `/api/upload` (resolves Turbopack Maximum Array Nesting Exceeded runtime errors).
+- [x] Support dynamic catalog page counts (4 pages for 1-4 images, 6 pages for 5+ images) without dummy trailing pages.
+- [x] Implement programmatic downloads for side-by-side images in split layout spreads.
+- [x] Add real-time page deletion controls in the dashboard lookbook Sheet Editor.
+- [x] Target video embeds and CTA buttons dynamically to exactly one inner page index, preventing duplicated overlays across other sheets.
+- [x] Set up Clerk Authentication across landing pages, navigations, and dashboard routes using Next.js 16 Proxy configuration (`proxy.ts`) and opted out of Clerk telemetry tracking.
+- [x] Enforced private per-user database schemas in Sanity (associating user lookbooks with their Clerk user ID).
+- [x] Built the "My Creatives" dashboard tab, displaying a list of user-created publications with options to view public links and hot-reload them back into the 3D editor.
+- [x] Redesigned the entire workspace dashboard using a sleek, state-of-the-art dark mode UI with neon-lime (`lime-400`) accents, including a user-specific Left Sidebar, center control panel, and stage view.
+- [x] Implemented "Design Manually (Bypass AI)" action to instantly instantiate blank 6-page publications, bypassing AI rate-limits and latency.
+- [x] Added inline "Upload File" buttons for image inputs inside lookbook Sheet Editor to upload page images directly to Sanity Asset Lake.
+- [x] Implemented Add and Delete hotspot features within lookbook Sheet Editor, making product hotspots fully optional and dynamic.
+- [x] Fixed YouTube embed URL parsing to convert raw watch/share URLs on-the-fly inside both the Sheet Editor and the 3D Flipbook viewer.
+- [x] Integrated Catalogue Settings (Title, Brand, Subtitle) in the lookbook Sheet Editor.
+- [x] Implemented SEO best practices (OpenGraph, Twitter Cards, robots index tags, canonicals, and Schema.org JSON-LD Structured Data) on all public-facing publication pages for optimized search engine discovery.
+- [x] Allowed lookbook overwrites/saves to preserve existing links and document IDs, instead of generating duplicates.
+- [x] Created delete catalog actions and interface triggers to securely delete lookbooks from Sanity Content Lake database.
+- [x] Simplified the landing Home Page (`app/(marketing)/page.tsx`) into a server-rendered showroom showcase gallery, fetching all real user-created lookbooks dynamically from Sanity.
+- [x] Built a non-blocking background analytics tracker to increment and log lookbook page views atomically inside Sanity, displaying a dynamic clicks badge under My Creatives.
+- [x] Restyled the About page, write-review page, and navigation logo brand text alongside CTA buttons to neon-lime dark mode standards.
+- [x] Realigned the About page copywriting to focus on 3D shoppable digital showrooms and lookbooks, and created an automated Unsplash fashion gallery slideshow to resolve empty image containers.
+- [x] Integrated mixed Sanity queries on the About page to combine pack cover images and lookbook page images in a randomized gallery loop, fixing Next.js parent height warnings.
+- [x] Resolved Next.js `<Image>` performance warnings by supplying missing responsive `sizes` parameters and upgrading the homepage showcase covers to use next/image.
+- [x] Created dynamic detailed `lib/seo.ts` utility defining production canonicals (`https://www.imagestudiolab.com`), Google Search Console verifications, and structured Schema.org JSON-LD scripts (Organization, WebSite, Catalog).
+- [x] Bound default layout, dynamic lookbook page, and homepage renders to dynamic SEO and JSON-LD schema blocks.
+- [x] Hided default "Folio" / "FOLIO" branding labels across homepage grids, margins, lookbooks, and previews to only show titles/names.
+
 
 ## In Progress
-- [x] Initializing `globals.css` with brand tokens.
-- [x] Configuring `layout.tsx` with Fraunces/Inter fonts.
-- [x] Fix `ReferenceError: window is not defined` in `/admin` route.
-- [x] Fix hydration mismatch error caused by browser extensions.
-- [x] Refactor root layout to use route groups (isolated Sanity Studio).
-- [x] Fix `AbortError` and modernize Sanity config (v5 structures).
-- [x] Setting up the first Unit Spec (`01-foundations`).
-- [x] Created dynamic brand catalogue route at `/catalogues/[businessName]`.
-- [x] Built interactive 3D Flipbook component with custom Web Audio page-flip synthesis.
-- [x] Added dynamic hotspots with detail popovers for lookbooks.
-- [x] Created premium client booking inquiry drawer.
-- [x] Generated high-end fashion illustration `5.png` for the lookbook spread.
-- [x] Refactored 3D flipbook animation to enable centering translations.
-- [x] Corrected leaf rotation origin to 'left' to enable smooth opening on both sides.
-- [x] Added split binder cover shell styling to prevent visual leaks during closed states.
-- [x] Set strict backface-visibility and translateZ(0) to prevent overflow bleed-throughs.
-- [x] Applied direct nested rounded corners (rounded-l-xl/rounded-r-xl) to image containers, images, and highlights to prevent corner bleed-outs on rounded book pages.
-- [x] Optimized editorial page spacing, vertical gaps, and font scale ratios to prevent quote block truncation and ensure 100% text visibility.
-- [x] Corrected 3D Z-axis translation (`translateZ`) signs for flipped sheets to account for coordinate negation during Y-axis rotation, fixing the stacked page order on the left page.
-- [x] Implemented native, hardware-accelerated touch swipe gestures (`onTouchStart`, `onTouchMove`, `onTouchEnd`) for mobile carousels to enable fluid drag page turns.
+- [ ] Connect brief uploader panel dynamically to generated 3D flipbook components.
+- [ ] Set up visual preset style overrides (Earthy Sage, Midnight Velvet, Crimson Rose) in the flipbook viewer.
+- [ ] Wire up simulated HubSpot lead-gen drawers with conversion metrics.
 
-
-
-
-
-## Next Up
-- [ ] Unit 01: Core Layout & Navigation.
-- [ ] Unit 02: Homepage Hero Section.
-- [ ] Unit 03: Pack Grid & Segment Filters.
-
-## Session Notes (2026-05-07)
-- Started the project based on Next.js 16 template.
-- Integrated Six-File Context Methodology.
-- Brand palette confirmed from reference HTML.
-- **Fixed Sanity Studio SSR Error**: Wrapped `NextStudio` in a dynamic import with `ssr: false`.
-- **Fixed Hydration Mismatch**: Added `suppressHydrationWarning` to `<body>`.
-- **Isolated Sanity Studio**: Moved marketing pages to `(marketing)` route group to prevent layout leaks (Navbar/Footer) into the Admin Studio.
-- **Modernized Sanity Config**: Updated `sanity.config.ts` to use `structureTool` (Sanity v5 standard) and fixed module imports.
-- **Fixed AbortError**: Implemented a `mounted` state with a 100ms delay to stabilize the Sanity Studio initialization in React 19 dev mode.
-- **Schema Optimization**: Made `gumroadUrl` optional and moved `masterPrompt` to the `Pack` schema (global for the collection) instead of individual prompts.
-- **Segment Simplification**: Removed `Sellers`, `Fans`, and `Professionals` from both Sanity schema and UI constants to focus strictly on `Creators` for launch.
-- **Price Removal**: Removed all pricing fields (`priceUSD`, `priceINR`) from the CMS and frontend to allow for a more flexible, link-based distribution model.
-- **Image Rendering Fix**: Configured `cdn.sanity.io` in `next.config.ts` to allow Next.js to serve images uploaded to Sanity.
-- **Performance Optimization**: Added the `sizes` prop to all responsive images to fix Next.js performance warnings and optimize image loading.
-- **Homepage Simplification**: Refactored the Hero section to a centered, text-only layout and removed the redundant `ProblemSolution` section to create a cleaner, more impactful first impression.
-- **Visual Identity Update**: Replaced text logos with the `logo.png` image and evolved the color palette to a 'Warm Stone & Forest Sage' theme for a more unique, high-end studio aesthetic.
-- **Dynamic Content Focus**: Removed the hardcoded 'What's inside the Guide' section from pack detail pages to ensure only live data from Sanity is displayed.
-- **Pack Details Refinement**: Cleaned up the `PackHero` section by removing 'Secure Checkout' badges, 'Midjourney' compatibility, and 'Delivery' info to focus strictly on core features.
-- **Mobile Responsiveness Fix**: Resolved horizontal overflow issues on small devices by allowing breadcrumbs to wrap, adjusting fluid typography clamps, and ensuring long words break correctly.
-- **Gallery & UX Optimization**: Achieved uniform card heights in the gallery using a fixed aspect-ratio grid, and enhanced the Master Prompt section with a copy-to-clipboard button and improved text readability.
-- **Layout Refinement**: Consolidated the 'Get the Pack' button and 'Compatibility' info into a single streamlined row for better vertical space utilization.
-- **Editorial Polish**: Refined the gallery heading to simply 'Generations' for a more direct, studio-level aesthetic.
-- **Component Evolution**: Replaced Dialogs with a custom side-sliding Drawer component for prompt details, improving both accessibility (fixing missing title errors) and the overall mobile/desktop browsing experience.
-- **Prompt Detail Refinement**: Simplified the prompt view by removing redundant versions and increasing text brightness for a cleaner, more readable 'studio' feel.
-- **UI Consolidation**: Removed redundant secondary CTA buttons from the quick-view drawer to minimize clutter and focus on the primary pack purchase flow.
-- **Interactive Comparison**: Implemented a draggable 'Before/After' image comparison slider for relighting prompts, providing a high-impact interactive experience in the detail view.
-- **Master Prompt Optimization**: Enhanced the Master Prompt section with a scrollable container to prevent overflow, improved text legibility, and a high-visibility 'Copy Prompt' action.
-- **Mobile UX Refinement**: Resolved layout overlap on mobile by adjusting container padding to accommodate the sticky 'Get Master Pack' CTA, and enhanced the drawer with a high-visibility, touch-friendly close button for easier navigation.
-- **Visual Flow Optimization**: Tightened vertical spacing between the Hero and Gallery sections to create a more cohesive, high-end editorial rhythm.
-- **Visual Identity Update**: Updated the site's Open Graph and Twitter metadata to use `og.png` for a consistent social sharing experience.
-- **SEO & Coverage Fix**: Addressed issues from the coverage report by implementing a dynamic `sitemap.ts`, `robots.ts`, canonical tags, and page-specific metadata for all marketing routes.
-
-
-
-### Core Features
-- **Editorial Gallery**: Masonry-style discovery of AI generations.
-- **Dynamic Pack Pages**: Detailed landing pages for each collection with Gumroad CTAs.
-- **Segmented Browsing**: Targeted sections for Sellers, Creators, Fans, and Professionals.
-- **Lead Magnet**: "Try Free" flow to build an email list via ConvertKit.
+## Session Notes
+- Starting Phase 1 transition: Pivoted product scope from prompt pack store to B2B publishing SaaS.
+- Refocused codebase on leveraging the highly powerful existing 3D CSS layout transitions and audio synthesis engines as the foundation for the new Real HTML Viewer.

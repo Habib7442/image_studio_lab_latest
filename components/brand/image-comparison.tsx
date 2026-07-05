@@ -70,6 +70,7 @@ export const ImageComparison = ({
           src={afterImage}
           alt="After"
           fill
+          sizes="(max-width: 768px) 100vw, 600px"
           className="object-cover"
           priority
         />
@@ -84,6 +85,7 @@ export const ImageComparison = ({
           src={beforeImage}
           alt="Before"
           fill
+          sizes="(max-width: 768px) 100vw, 600px"
           className="object-cover"
           priority
         />

@@ -16,12 +16,38 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 
+  const pageTitle = `${formattedName} × Image Studio Lab — Premium Lookbook`;
+  const pageDesc = `Immerse in the interactive 3D digital catalogue for ${formattedName}. Powered by high-end AI product photography prompts from Image Studio Lab.`;
+  const pageImage = "https://imagestudiolab.com/catalogues/new-fashion/1.png";
+
   return {
-    title: `${formattedName} × Image Studio Lab — Premium Lookbook`,
-    description: `Immerse in the interactive 3D digital catalogue for ${formattedName}. Powered by high-end AI product photography prompts from Image Studio Lab.`,
+    title: pageTitle,
+    description: pageDesc,
+    alternates: {
+      canonical: `/catalogues/${businessName}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+      },
+    },
     openGraph: {
-      title: `${formattedName} Interactive 3D Lookbook`,
-      description: `Immerse in the interactive 3D digital catalogue for ${formattedName}. Powered by high-end AI product photography prompts from Image Studio Lab.`,
+      title: pageTitle,
+      description: pageDesc,
+      type: "article",
+      url: `/catalogues/${businessName}`,
+      siteName: "Image Studio Lab",
+      images: [{ url: pageImage, width: 1200, height: 630, alt: formattedName }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: pageTitle,
+      description: pageDesc,
+      images: [pageImage],
     },
   };
 }
@@ -149,8 +175,37 @@ export default async function CataloguePage({ params }: PageProps) {
     }
   ];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": `${formattedName} × Image Studio Lab — Premium Lookbook`,
+    "headline": `${formattedName} Catalogue Showcase`,
+    "description": `Immerse in the interactive 3D digital catalogue for ${formattedName}. Powered by high-end AI product photography prompts from Image Studio Lab.`,
+    "image": "https://imagestudiolab.com/catalogues/new-fashion/1.png",
+    "author": {
+      "@type": "Organization",
+      "name": formattedName
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Image Studio Lab",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://imagestudiolab.com/logo.png"
+      }
+    },
+    "datePublished": new Date().toISOString(),
+    "genre": "Catalog",
+    "creativeWorkStatus": "Published"
+  };
+
   return (
-    <div className="min-h-screen bg-[#15110D] text-[#FAF7F2] font-sans overflow-x-hidden pt-20">
+    <div className="min-h-screen bg-[#15110D] text-[#FAF7F2] font-sans overflow-x-hidden pt-20 relative">
+      {/* Schema.org Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Showroom Header */}
       <header className="relative py-12 md:py-16 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(184,137,62,0.06)_0%,transparent_70%)] pointer-events-none" />

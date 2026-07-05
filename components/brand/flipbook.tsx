@@ -15,8 +15,10 @@ import {
   Minimize2,
   RotateCcw,
   BookOpen,
+  Download,
+  ArrowRight,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getYoutubeEmbedUrl } from "@/lib/utils";
 import { CatalogueHotspot } from "./catalogue-hotspot";
 
 // Interactive Hotspot Interface
@@ -40,6 +42,10 @@ interface Page {
   quote?: string;
   quoteAuthor?: string;
   hotspots?: Hotspot[];
+  videoUrl?: string;
+  link?: string;
+  linkText?: string;
+  images?: string[];
 }
 
 interface FlipbookProps {
@@ -126,6 +132,28 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
     touchEndX.current = e.targetTouches[0].clientX; // initialize to prevent ghost jumps
+  };
+
+  const handleDownloadPageImages = (e: React.MouseEvent, p: Page) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    const imagesToDownload = p.images && p.images.length > 0
+      ? p.images
+      : p.src
+        ? [p.src]
+        : [];
+
+    imagesToDownload.forEach((src, idx) => {
+      const link = document.createElement("a");
+      link.href = src;
+      const extension = src.split("?")[0].split(".").pop() || "jpg";
+      link.download = `page-${p.title.toLowerCase().replace(/\s+/g, "-")}-image-${idx + 1}.${extension}`;
+      link.target = "_blank";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
@@ -219,32 +247,73 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
         ? "rounded-l-xl"
         : "rounded-r-xl";
 
+    if (!page) {
+      return null;
+    }
+
     if (page.type === "image") {
+      const showSplit = page.images && page.images.length > 1;
+
       return (
         <div className={cn("relative w-full h-full group/page select-none overflow-hidden", roundedClass)}>
-          {page.src && (
-            <Image
-              src={page.src}
-              alt={page.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-              className={cn("object-cover transition-transform duration-700 hover:scale-102", roundedClass)}
+          {page.videoUrl ? (
+            <iframe
+              src={getYoutubeEmbedUrl(page.videoUrl)}
+              title={page.title}
+              className="w-full h-full border-0 absolute inset-0 z-0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
             />
+          ) : showSplit ? (
+            <div className="w-full h-full grid grid-cols-2 gap-1 bg-[#100D0B]/20">
+              <div className="relative h-full w-full">
+                <Image
+                  src={page.images![0]}
+                  alt={`${page.title} - Side A`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  priority
+                  className="object-cover transition-transform duration-700 hover:scale-102"
+                />
+              </div>
+              <div className="relative h-full w-full border-l border-white/5">
+                <Image
+                  src={page.images![1]}
+                  alt={`${page.title} - Side B`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 25vw"
+                  priority
+                  className="object-cover transition-transform duration-700 hover:scale-102"
+                />
+              </div>
+            </div>
+          ) : (
+            page.src && (
+              <Image
+                src={page.src}
+                alt={page.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                className={cn("object-cover transition-transform duration-700 hover:scale-102", roundedClass)}
+              />
+            )
           )}
           {/* Subtle gradient highlights to mimic paper curve and light */}
-          <div
-            className={cn(
-              "absolute inset-0 pointer-events-none z-10 transition-opacity duration-500 bg-gradient-to-r",
-              isLeft
-                ? "from-black/10 via-transparent to-black/30"
-                : "from-black/30 via-transparent to-black/10",
-              roundedClass
-            )}
-          />
+          {!page.videoUrl && (
+            <div
+              className={cn(
+                "absolute inset-0 pointer-events-none z-10 transition-opacity duration-500 bg-gradient-to-r",
+                isLeft
+                  ? "from-black/10 via-transparent to-black/30"
+                  : "from-black/30 via-transparent to-black/10",
+                roundedClass
+              )}
+            />
+          )}
 
           {/* Render pulsing gold hotspots */}
-          {page.hotspots?.map((hotspot, idx) => (
+          {!page.videoUrl && page.hotspots?.map((hotspot, idx) => (
             <CatalogueHotspot key={idx} {...hotspot} />
           ))}
 
@@ -254,6 +323,32 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
               {page.subtitle}
             </span>
           </div>
+
+          {/* Action Outbound CTA Link Overlay */}
+          {page.link && (
+            <a
+              href={page.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute bottom-6 left-6 z-20 flex items-center gap-1.5 rounded-full bg-gold hover:bg-gold/80 text-foreground font-bold tracking-widest text-[9px] uppercase px-4 py-2.5 border border-gold/20 pointer-events-auto shadow-lg hover:scale-102 active:scale-98 transition-all duration-300"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {page.linkText || "Visit Website"}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          )}
+
+          {/* Download button overlay */}
+          {!page.videoUrl && (page.src || (page.images && page.images.length > 0)) && (
+            <button
+              type="button"
+              onClick={(e) => handleDownloadPageImages(e, page)}
+              className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5 rounded-full bg-black/60 hover:bg-accent backdrop-blur-md text-[10px] font-bold text-white tracking-widest uppercase px-3.5 py-2 border border-white/10 opacity-0 group-hover/page:opacity-100 transition-all duration-300 pointer-events-auto shadow-md cursor-pointer"
+            >
+              <Download className="h-3.5 w-3.5" />
+              Download
+            </button>
+          )}
         </div>
       );
     }
@@ -277,7 +372,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
         )}
 
         <div className="flex justify-between items-center text-[10px] font-bold tracking-widest text-[#6B5F52] border-b border-[#15110d]/10 pb-2.5">
-          <span>{brandName.toUpperCase()}</span>
+          <span>{brandName && brandName.toUpperCase() !== "FOLIO" ? brandName.toUpperCase() : ""}</span>
           <span>EST. 2026</span>
         </div>
 
@@ -309,7 +404,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
         </div>
 
         <div className="flex justify-between items-center text-[9px] font-bold text-[#6B5F52] border-t border-[#15110d]/10 pt-2.5">
-          <span>IMAGE STUDIO LAB × SHOWROOM</span>
+          <span>{brandName && brandName.toUpperCase() !== "FOLIO" ? `${brandName.toUpperCase()} COLLECTION` : "COLLECTION"}</span>
           <span>PAGE 02</span>
         </div>
       </div>

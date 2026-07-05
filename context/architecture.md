@@ -1,38 +1,43 @@
-# Architecture — imagestudiolab.com
+# Architecture — Folio (imagestudiolab.com)
 
 ## Stack Table
 
 | Layer | Technology | Role |
 | :--- | :--- | :--- |
-| **Framework** | Next.js 16 (App Router) | Core application and routing |
+| **Framework** | Next.js 16 (App Router) | Core application routing and layout |
 | **Styling** | Tailwind CSS v4 | Utility-first styling with modern features |
-| **Components** | Shadcn UI | Accessible, unstyled components |
-| **Language** | TypeScript | Type safety and developer experience |
-| **Checkout** | Gumroad | External MoR for payments and file delivery |
-| **Email** | ConvertKit | Lead magnets and drip sequences |
-| **Analytics** | Plausible | Privacy-friendly tracking |
-| **Icons** | Lucide React | Consistent iconography |
+| **AI API** | Direct REST API Fetch | Google Gemini 3.5 Flash structured layout generation |
+| **Audio** | Web Audio API | Custom real-time synthesis of page-flip friction |
+| **Storage Model** | JSONB Publication Tree | Catalog schemas represented as structured JSON |
+| **Lead Capture** | Mock CRM Integration | Attributes conversions and lead entries |
 
 ## System Boundaries
 
-- `app/`: Contains all routes and page components.
-- `components/ui/`: Shadcn primitive components.
-- `components/brand/`: Custom-built editorial components (Packs, Heroes, etc.).
-- `lib/`: Shared utilities and constants.
-- `docs/`: Original product requirements and design references.
-- `context/`: AI-driven development context files.
+- `app/`:
+  - `actions/`: Next.js Server Actions handling LLM structure generation.
+  - `(marketing)/`: Main marketing shell and dynamic editor page.
+- `components/brand/`:
+  - `flipbook.tsx`: The 3D CSS page-flip layout engine.
+  - `flipbook-audio.ts`: Custom Web Audio sound synthesis hooks.
+  - `editor-console.tsx`: The direct manipulation dashboard panel.
+- `lib/`:
+  - `gemini.ts`: Client instance and generation utility helper.
+  - `constants.ts`: Color schemes, fallback presets, and mock collections.
 
-## Storage Model
-- **Static Content**: Pack data and prompt samples are stored as local constants/JSON.
-- **Images**: Hosted on Cloudinary (free tier) for performance.
-- **No Database (MVP)**: All persistent data (customers, orders) is handled by Gumroad.
+## Core Architectural Flows
 
-## Auth & Access Model
-- **Public**: Entire marketing site is public.
-- **Paid Content**: Access to full PDFs and "Studio Vault" is granted post-purchase via Gumroad's secure delivery.
+### 1. Catalog Layout Pipeline (LLM to DOM)
+1. User enters natural language brief in UI.
+2. Form submits to Next.js Server Action (`generateCatalog`).
+3. Action calls the Google Gemini REST API with `responseSchema` (structured JSON).
+4. Gemini returns a validated JSON object conforming to the target page models.
+5. Next.js component hydrates the 3D Flipbook viewer with the returned JSON catalog state.
 
-## Invariants (Rules)
-1.  **Marketing-Only**: The site must never handle raw credit card data; always redirect to Gumroad.
-2.  **Performance-First**: All landing pages must be statically optimized where possible.
-3.  **Responsive-First**: Every component must be verified on mobile (iPhone/Android) before merge.
-4.  **Consistency**: Use only defined UI tokens; never hardcode hex values in components.
+### 2. Interactive Hotspot Attribution
+* Interactive catalog elements are parsed dynamically.
+* Clicking or hovering hotspots fetches mock product listings and displays details in an animated drawer.
+
+## System Invariants
+1. **Server Actions only for API Keys**: The `GEMINI_API_KEY` must never leak to the client; all LLM calls must be isolated inside Server Actions (`"use server"`).
+2. **Performance Isolation**: Heavy Web Audio synthesis and 3D transforms must be strictly contained within client-side hooks to prevent Next.js SSR hydration mismatches.
+3. **Responsive Flow**: Standardize desktop dual-page display with absolute portrait single-page mode on small mobile screens.

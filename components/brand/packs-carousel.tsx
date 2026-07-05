@@ -35,6 +35,7 @@ export const PacksCarousel = ({ packs }: PacksCarouselProps) => {
               src={urlFor(pack.coverImage).width(1200).url()}
               alt={pack.title}
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               priority={i === 0}
               className="object-cover"
             />

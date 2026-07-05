@@ -1,60 +1,121 @@
 import React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
-
-import { client } from "@/lib/sanity/client";
-import { allPacksQuery } from "@/lib/sanity/queries";
-import { PacksCarousel } from "@/components/brand/packs-carousel";
+import { AboutSlideshow } from "./about-slideshow";
+import { client, urlFor } from "@/lib/sanity/client";
 
 export const metadata: Metadata = {
-  title: "Our Vision — The Art of Zero Engineering",
-  description: "Learn about the philosophy behind Image Studio Lab and our minimalist approach to editorial AI prompt engineering.",
+  title: "Our Vision — The Art of Digital Showrooms | imagestudiolab",
+  description: "Learn about the philosophy behind imagestudiolab and our approach to compiling editorial 3D shopeable catalogs and digital lookbooks.",
 };
 
+/**
+ * Fetch a mixed list of covers/images from packs and catalogs inside Sanity Content Lake database.
+ */
+async function getMixedSanityImages() {
+  try {
+    const packsQuery = `*[_type == "pack" && defined(coverImage)] {
+      _id,
+      title,
+      coverImage
+    }`;
+    
+    const catalogsQuery = `*[_type == "catalog"] {
+      _id,
+      title,
+      pagesJson
+    }`;
+
+    const [packs, catalogs] = await Promise.all([
+      client.fetch(packsQuery, {}, { next: { revalidate: 10 } }),
+      client.fetch(catalogsQuery, {}, { next: { revalidate: 10 } })
+    ]);
+
+    const slides: { src: string; title: string; type: string }[] = [];
+
+    // 1. Process catalogs page images
+    catalogs.forEach((cat: any) => {
+      try {
+        if (cat.pagesJson) {
+          const parsed = JSON.parse(cat.pagesJson);
+          const firstImg = parsed.find((p: any) => p.type === "image" && (p.src || (p.images && p.images[0])));
+          if (firstImg) {
+            slides.push({
+              src: firstImg.src || firstImg.images[0],
+              title: cat.title || "Untitled Catalog",
+              type: "3D Showroom"
+            });
+          }
+        }
+      } catch (_) {}
+    });
+
+    // 2. Process packs cover images
+    packs.forEach((pack: any) => {
+      if (pack.coverImage) {
+        try {
+          const imgUrl = urlFor(pack.coverImage).width(1000).url();
+          slides.push({
+            src: imgUrl,
+            title: pack.title || "Prompt Collection",
+            type: "Aesthetic Pack"
+          });
+        } catch (_) {}
+      }
+    });
+
+    // Shuffle slides to get a nice organic mix of both formats
+    return slides.sort(() => Math.random() - 0.5);
+  } catch (err) {
+    console.error("Error fetching mixed sanity images for about page:", err);
+    return [];
+  }
+}
+
 export default async function AboutPage() {
-  const packs = await client.fetch(allPacksQuery);
+  const slides = await getMixedSanityImages();
 
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col bg-[#09090B] text-[#FAF7F2] font-sans pt-24 overflow-x-hidden relative">
+      {/* Decorative Background Glows */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(163,230,53,0.04)_0%,transparent_60%)] pointer-events-none z-0" />
+
       {/* Hero Section */}
-      <section className="relative px-6 pt-16 pb-12 md:pt-24 md:pb-20">
+      <section className="relative px-6 pt-16 pb-12 md:pt-24 md:pb-20 z-10">
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="mb-8 text-5xl font-serif tracking-tight md:text-7xl lg:text-8xl">
+          <h1 className="mb-8 text-5xl font-serif font-light tracking-tight md:text-7xl lg:text-8xl">
             The art of <br />
-            <span className="text-accent italic">Zero Engineering.</span>
+            <span className="text-lime-400 italic font-serif font-normal">Digital Showrooms.</span>
           </h1>
-          <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-            We believe that high-end AI art shouldn't require a computer science degree. 
-            Image Studio Lab was built to bridge the gap between creative vision and technical execution.
+          <p className="mx-auto max-w-2xl text-xs md:text-sm leading-relaxed text-muted font-sans font-medium">
+            We believe that premium brand storytelling shouldn't require complex web developers or outdated PDF viewers. 
+            imagestudiolab bridges the gap between static product catalogs and interactive 3D shoppable publications.
           </p>
         </div>
       </section>
 
       {/* Story Section */}
-      <section className="bg-black text-foreground py-24 md:py-32">
+      <section className="bg-[#121215]/50 border-y border-white/5 py-24 md:py-32 z-10 relative">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-stretch">
-            <div className="relative min-h-[500px] md:min-h-[700px] overflow-hidden rounded-3xl bg-black shadow-2xl">
-               <PacksCarousel packs={packs} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Fixed height container h-[450px] md:h-[600px] ensures Next Image fill scales correctly without warnings */}
+            <div className="relative h-[450px] md:h-[600px] overflow-hidden rounded-3xl bg-[#09090B] border border-white/5 shadow-2xl">
+               <AboutSlideshow slides={slides} />
             </div>
-            <div>
-              <h2 className="text-4xl font-serif mb-8 md:text-5xl">Our Philosophy</h2>
-              <div className="space-y-6 text-lg text-foreground/80 leading-relaxed">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-3xl font-serif font-light mb-2 md:text-4xl">Our Philosophy</h2>
+              <div className="space-y-6 text-xs md:text-sm text-muted leading-relaxed font-sans font-medium">
                 <p>
-                  Most AI prompts you find online are cluttered with "garbage text"—meaningless 
-                  keywords that add noise instead of nuance. At Image Studio Lab, we follow 
-                  a minimalist approach.
+                  Traditional digital catalogs wrap static PDFs in clunky viewer frames that search engines cannot crawl and mobile visitors struggle to navigate. 
+                  We believe in publishing native, high-performance HTML documents.
                 </p>
                 <p>
-                  Every pack we release is the result of thousands of test generations. We strip 
-                  away the fluff to provide you with the "Master Code"—the precise set of 
-                  instructions that guarantees an editorial-grade result every time.
+                  Every lookbook compiled with imagestudiolab features hardware-accelerated 3D page turns, fluid mobile swiping, custom brand palette coloring, and interactive shoppable hotspots that bind products directly to inventory.
                 </p>
-                <div className="pt-8">
-                   <Link href="/packs" className="inline-flex items-center gap-2 border-b border-accent pb-1 text-accent hover:text-accent/80 transition-colors">
-                     Browse the collections <ArrowRight className="h-4 w-4" />
+                <div className="pt-4">
+                   <Link href="/" className="inline-flex items-center gap-2 border-b border-lime-400 pb-1 text-lime-400 hover:text-lime-300 transition-colors uppercase tracking-widest text-[10px] font-bold">
+                     View featured showrooms <ArrowRight className="h-3.5 w-3.5" />
                    </Link>
                 </div>
               </div>
@@ -64,27 +125,27 @@ export default async function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="px-6 py-32">
+      <section className="px-6 py-24 z-10 relative">
         <div className="mx-auto max-w-7xl text-center">
-           <h3 className="text-sm font-semibold uppercase tracking-[0.2em] text-accent mb-16">The Standards</h3>
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+           <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-lime-400 mb-16 font-sans">The Standards</h3>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
               {[
                 {
-                  title: "Editorial First",
-                  desc: "We don't do 'random'. Every prompt is designed to produce images that look like they belong in a high-end fashion magazine or an architectural digest."
+                  title: "3D Page-Turns",
+                  desc: "Hardware-accelerated CSS 3D transforms mimic the luxury feel of a physical catalog, optimized for sub-1s load speeds on mobile browsers."
                 },
                 {
-                  title: "Model Agnostic",
-                  desc: "While we optimize for ChatGPT and Gemini, our logic is rooted in cinematic principles that translate across DALL-E, Stable Diffusion, and beyond."
+                  title: "Shoppable Hotspots",
+                  desc: "Drop tags directly onto pages linking products to your online store, allowing visitors to purchase directly from the lookbook."
                 },
                 {
-                  title: "Human Centric",
-                  desc: "Technology should serve the creator. We provide the tools so you can focus on the direction, not the syntax."
+                  title: "AI-Assisted Layouts",
+                  desc: "Bypass complex design suites. Generate validated publication grids from simple briefs or start designing page sheets manually with ease."
                 }
               ].map((val) => (
-                <div key={val.title} className="group p-8 border border-border/50 rounded-2xl hover:bg-foreground/5 transition-colors">
-                  <h4 className="text-2xl font-serif mb-4">{val.title}</h4>
-                  <p className="text-muted leading-relaxed">{val.desc}</p>
+                <div key={val.title} className="group p-8 border border-white/5 bg-[#121215] rounded-2xl hover:border-lime-400/30 transition-all duration-300">
+                  <h4 className="text-xl font-serif font-light mb-4 text-[#FAF7F2]">{val.title}</h4>
+                  <p className="text-xs text-muted leading-relaxed font-sans font-medium">{val.desc}</p>
                 </div>
               ))}
            </div>
