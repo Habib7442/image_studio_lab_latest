@@ -239,6 +239,26 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
     triggerFlipAudio();
   };
 
+  const getActivePagesForDownload = (): Page[] => {
+    if (isMobile) {
+      const page = pages[activeSpread];
+      return page ? [page] : [];
+    } else {
+      if (activeSpread === 0) {
+        return [pages[0]];
+      } else if (activeSpread === totalLeafs) {
+        return [pages[totalPages - 1]];
+      } else {
+        const leftIdx = activeSpread * 2 - 1;
+        const rightIdx = activeSpread * 2;
+        const activeList: Page[] = [];
+        if (pages[leftIdx]) activeList.push(pages[leftIdx]);
+        if (pages[rightIdx]) activeList.push(pages[rightIdx]);
+        return activeList;
+      }
+    }
+  };
+
   // Render internal page types: image (with hotspots) vs. editorial text spreads
   const renderPageContent = (page: Page, isLeft: boolean) => {
     const roundedClass = isMobile
@@ -338,17 +358,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
             </a>
           )}
 
-          {/* Download button overlay */}
-          {!page.videoUrl && (page.src || (page.images && page.images.length > 0)) && (
-            <button
-              type="button"
-              onClick={(e) => handleDownloadPageImages(e, page)}
-              className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5 rounded-full bg-black/60 hover:bg-accent backdrop-blur-md text-[10px] font-bold text-white tracking-widest uppercase px-3.5 py-2 border border-white/10 md:opacity-0 md:group-hover/page:opacity-100 opacity-100 transition-all duration-300 pointer-events-auto shadow-md cursor-pointer"
-            >
-              <Download className="h-3.5 w-3.5" />
-              Download
-            </button>
-          )}
+
         </div>
       );
     }
@@ -501,6 +511,19 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
           aria-label="Toggle Zoom"
         >
           {isZoomed ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+        </button>
+
+        {/* Global Download Button */}
+        <button
+          onClick={(e) => {
+            const activePages = getActivePagesForDownload();
+            activePages.forEach((p) => handleDownloadPageImages(e, p));
+          }}
+          className="p-1.5 rounded-full transition-all cursor-pointer hover:bg-gold/15 text-muted hover:text-gold active:scale-95"
+          aria-label="Download current page images"
+          title="Download Current Images"
+        >
+          <Download className="h-4 w-4" />
         </button>
       </div>
 
