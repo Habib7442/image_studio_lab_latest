@@ -5,10 +5,11 @@ import { generateCatalogAction } from "@/lib/actions/generate-catalog";
 import { saveCatalogAction } from "@/lib/actions/save-catalog";
 import { getUserCatalogsAction } from "@/lib/actions/get-user-catalogs";
 import { deleteCatalogAction } from "@/lib/actions/delete-catalog";
+import { toggleCatalogPublicAction } from "@/lib/actions/toggle-public";
 import { Flipbook } from "@/components/brand/flipbook";
 import { CatalogueBooking } from "@/components/brand/catalogue-booking";
 import { FALLBACK_CATALOGS } from "@/lib/gemini";
-import { Sparkles, Send, Palette, FileText, Zap, Info, LayoutDashboard, Upload, X, Image as ImageIcon, Video, Link as LinkIcon, Edit3, Cloud, Copy, ExternalLink, Check, BookOpen, Search } from "lucide-react";
+import { Sparkles, Send, Palette, FileText, Zap, Info, LayoutDashboard, Upload, X, Image as ImageIcon, Video, Link as LinkIcon, Edit3, Cloud, Copy, ExternalLink, Check, BookOpen, Search, Globe, Lock } from "lucide-react";
 import { cn, getYoutubeEmbedUrl } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 
@@ -349,6 +350,28 @@ export default function DashboardPage() {
     } catch (err: any) {
       console.error("Delete catalog error:", err);
       alert("An unexpected error occurred while deleting the lookbook.");
+    }
+  };
+
+  const [isTogglingPublic, setIsTogglingPublic] = useState<Record<string, boolean>>({});
+
+  const handleTogglePublic = async (id: string, currentPublicState: boolean) => {
+    const nextPublicState = !currentPublicState;
+    setIsTogglingPublic((prev) => ({ ...prev, [id]: true }));
+    try {
+      const response = await toggleCatalogPublicAction(id, nextPublicState);
+      if (response.success) {
+        setUserCatalogs((prev) =>
+          prev.map((c) => (c._id === id ? { ...c, isPublic: nextPublicState } : c))
+        );
+      } else {
+        alert(response.error || "Failed to toggle public status.");
+      }
+    } catch (err: any) {
+      console.error("Toggle public status error:", err);
+      alert("An unexpected error occurred.");
+    } finally {
+      setIsTogglingPublic((prev) => ({ ...prev, [id]: false }));
     }
   };
 
@@ -1298,6 +1321,36 @@ export default function DashboardPage() {
                               {item.views || 0} clicks
                             </span>
                           </div>
+                        </div>
+
+                        {/* Public Showcase Toggle */}
+                        <div className="flex items-center justify-between bg-white/[0.02] border border-white/5 rounded-lg px-2.5 py-1.5 my-0.5">
+                          <div className="flex items-center gap-1.5 text-[9px] font-medium text-muted">
+                            {item.isPublic !== false ? (
+                              <>
+                                <Globe className="h-3 w-3 text-lime-400" />
+                                <span>Public on Showcase</span>
+                              </>
+                            ) : (
+                              <>
+                                <Lock className="h-3 w-3 text-gold" />
+                                <span>Private Draft</span>
+                              </>
+                            )}
+                          </div>
+                          <button
+                            type="button"
+                            disabled={isTogglingPublic[item._id]}
+                            onClick={() => handleTogglePublic(item._id, item.isPublic !== false)}
+                            className={cn(
+                              "text-[8px] font-extrabold uppercase tracking-widest px-2 py-0.5 rounded cursor-pointer transition-all border",
+                              item.isPublic !== false
+                                ? "bg-amber-500/10 text-amber-400 border-amber-500/20 hover:bg-amber-500/20"
+                                : "bg-lime-400/10 text-lime-400 border-lime-400/20 hover:bg-lime-400/20"
+                            )}
+                          >
+                            {isTogglingPublic[item._id] ? "..." : (item.isPublic !== false ? "Make Private" : "Make Public")}
+                          </button>
                         </div>
 
                         <div className="flex items-center justify-between gap-3 pt-1 border-t border-white/5">
