@@ -5,6 +5,15 @@ import { auth } from "@clerk/nextjs/server";
 const MAX_IMAGE_COUNT = 15;
 const MAX_IMAGE_SIZE_BYTES = 10 * 1024 * 1024; // 10MB limit
 
+// Configure Next.js Route Handler request body parser limit to 10MB (defaults to 4MB)
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb",
+    },
+  },
+};
+
 /**
  * API Route Handler to upload base64 images to Sanity from the client.
  * This completely bypasses React Server Component (RSC) parameter serialization limitations.
