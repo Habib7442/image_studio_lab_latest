@@ -9,7 +9,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false,
+  useCdn: true, // Enabled API CDN caching for ultra-fast public reads
 });
 
 // For secure server-side write operations (Reviews)
