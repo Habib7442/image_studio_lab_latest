@@ -343,7 +343,7 @@ export const Flipbook: React.FC<FlipbookProps> = ({ pages, brandName }) => {
             <button
               type="button"
               onClick={(e) => handleDownloadPageImages(e, page)}
-              className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5 rounded-full bg-black/60 hover:bg-accent backdrop-blur-md text-[10px] font-bold text-white tracking-widest uppercase px-3.5 py-2 border border-white/10 opacity-0 group-hover/page:opacity-100 transition-all duration-300 pointer-events-auto shadow-md cursor-pointer"
+              className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5 rounded-full bg-black/60 hover:bg-accent backdrop-blur-md text-[10px] font-bold text-white tracking-widest uppercase px-3.5 py-2 border border-white/10 md:opacity-0 md:group-hover/page:opacity-100 opacity-100 transition-all duration-300 pointer-events-auto shadow-md cursor-pointer"
             >
               <Download className="h-3.5 w-3.5" />
               Download
