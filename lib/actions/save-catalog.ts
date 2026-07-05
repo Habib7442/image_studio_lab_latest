@@ -15,10 +15,10 @@ interface SaveCatalogResponse {
 export async function saveCatalogAction(
   catalogData: {
     title: string;
-    subtitle: string;
-    brandName: string;
-    palettePreset: string;
-    pages: any[];
+    subtitle?: string;
+    brandName?: string;
+    palettePreset?: string;
+    pages?: any[];
     isPublic?: boolean;
   },
   catalogId?: string
@@ -28,17 +28,17 @@ export async function saveCatalogAction(
     return { success: false, error: "Unauthorized. Please sign in to save publications." };
   }
 
-  if (!catalogData.title || !catalogData.brandName || !catalogData.pages) {
-    return { success: false, error: "Missing required catalog fields." };
+  if (!catalogData.title) {
+    return { success: false, error: "Catalogue Title is required." };
   }
 
   try {
     const doc = {
       title: catalogData.title,
-      subtitle: catalogData.subtitle,
-      brandName: catalogData.brandName,
-      palettePreset: catalogData.palettePreset,
-      pagesJson: JSON.stringify(catalogData.pages),
+      subtitle: catalogData.subtitle || "",
+      brandName: catalogData.brandName || "",
+      palettePreset: catalogData.palettePreset || "earthy-sage",
+      pagesJson: catalogData.pages ? JSON.stringify(catalogData.pages) : "[]",
       isPublic: catalogData.isPublic !== undefined ? catalogData.isPublic : true,
     };
 
