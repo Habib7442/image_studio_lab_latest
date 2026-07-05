@@ -124,8 +124,8 @@ export default function DashboardPage() {
     if (!files || files.length === 0) return;
 
     Array.from(files).forEach((file) => {
-      if (file.size > 4 * 1024 * 1024) {
-        alert(`File "${file.name}" is larger than 4MB and will be skipped.`);
+      if (file.size > 10 * 1024 * 1024) {
+        alert(`File "${file.name}" is larger than 10MB and will be skipped.`);
         return;
       }
 
@@ -424,8 +424,8 @@ export default function DashboardPage() {
   const handleSheetImageUpload = async (pageIdx: number, field: string, files: FileList | null, subIdx?: number) => {
     if (!files || files.length === 0) return;
     const file = files[0];
-    if (file.size > 4 * 1024 * 1024) {
-      alert(`File "${file.name}" is larger than 4MB.`);
+    if (file.size > 10 * 1024 * 1024) {
+      alert(`File "${file.name}" is larger than 10MB.`);
       return;
     }
 
